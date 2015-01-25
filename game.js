@@ -14,7 +14,7 @@ window.onload = function() {
     function preload() {
         
         game.load.image('bob', 'assets/images/bob.png');
-        game.load.image('background', 'assets/images/background.jpg');
+        game.load.image('background', 'assets/images/background.png');
         //game.load.image('ground', 'assets/images/ground.png');
         cursors = game.input.keyboard.createCursorKeys();
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
