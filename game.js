@@ -36,7 +36,7 @@ window.onload = function() {
         //score
         var text = "Score" . score;
         var style = { font: "42px Arial", fill: "#5CA6FF", align: "center" };
-        var t = game.add.text(40, 40, text, style);
+        var t = game.add.text(game.world.centerX-300, 40, text, style);
 
         //sound
         //jumpsound = game.add.audio('jumpsound');
