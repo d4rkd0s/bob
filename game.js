@@ -84,7 +84,7 @@ window.onload = function() {
         if (cursors.left.isDown)
         {
             //  Move to the left
-            player.body.velocity.x = -200;
+            player.body.velocity.x = -180;
             //make the player look left
             //lookdir = "left";
             
@@ -92,7 +92,7 @@ window.onload = function() {
         else if (cursors.right.isDown)
         {
             //  Move to the right
-            player.body.velocity.x = 200;
+            player.body.velocity.x = 180;
             //make the player look right
             //lookdir = "right";
             
@@ -100,13 +100,13 @@ window.onload = function() {
         else if (cursors.up.isDown)
         {
           //  Move to the right
-          player.body.velocity.y = 200; 
+          player.body.velocity.y = -180; 
 
         }
         else if (cursors.down.isDown)
         {
           //  Move to the right
-          player.body.velocity.y = -200; 
+          player.body.velocity.y = 180; 
            
         }
         else
