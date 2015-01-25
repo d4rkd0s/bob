@@ -1,6 +1,18 @@
 .start{
 	position:absolute;
-	left: 1136px;
+	left: 1109px;
 	top: 169px;
-	width: 200px;
+	width: 228px;
+}
+.highscore{
+	position:absolute;
+	left: 1109px;
+	top: 269px;
+	width: 228px;
+}
+.quit{
+	position:absolute;
+	left: 1109px;
+	top: 369px;
+	width: 228px;
 }
