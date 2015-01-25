@@ -2,7 +2,7 @@ $(function() {
 
 window.onload = function() {
 
-    var game = new Phaser.Game(1920, 1080, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
     var jumping = "0";
 
@@ -45,7 +45,7 @@ window.onload = function() {
         //Uncaught TypeError: Cannot read property 'velocity' of null
         //fatty1.body.velocity.x=20;
 
-        ocean = game.add.sprite(0, game.world.height - 300, 'ocean');
+        ocean = game.add.sprite(0, game.world.height - 400, 'ocean');
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
