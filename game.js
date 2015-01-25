@@ -83,36 +83,42 @@ window.onload = function() {
 
         if (cursors.left.isDown)
         {
-            //  Move to the left
-            player.body.velocity.x = -180;
-            //make the player look left
-            //lookdir = "left";
+            if (cursors.up.isDown)
+            {
+                //  Move to the left+up
+                player.body.velocity.x = -90;
+                player.body.velocity.y = -90;
+            }
+            else if (cursors.down.isDown)
+            {
+                //  Move to the left+down
+                player.body.velocity.x = -90;
+                player.body.velocity.y = 90;
+            }
+            else
+            {
+                //  Move to the left
+                player.body.velocity.x = -180;
+            }
             
         }
+        
         else if (cursors.right.isDown)
         {
             //  Move to the right
             player.body.velocity.x = 180;
-            //make the player look right
-            //lookdir = "right";
-            
         }
         else if (cursors.up.isDown)
         {
-          //  Move to the right
-          player.body.velocity.y = -180; 
-
+            //  Move to the up
+            player.body.velocity.y = -180; 
         }
         else if (cursors.down.isDown)
         {
-          //  Move to the right
-          player.body.velocity.y = 180; 
-           
+            //  Move to the down
+            player.body.velocity.y = 180; 
         }
-        else
-        {
 
-        }
     
 
 
