@@ -31,7 +31,7 @@ window.onload = function() {
         game.add.sprite(0, 0, 'background');
 
         //Game Objects
-        player = game.add.sprite(550, game.world.height - 300, 'bob');
+        player = game.add.sprite(775, game.world.height - 150, 'bob');
 
 
         //sound
@@ -45,7 +45,7 @@ window.onload = function() {
         //Uncaught TypeError: Cannot read property 'velocity' of null
         //fatty1.body.velocity.x=20;
 
-        ocean = game.add.sprite(0, game.world.height - 400, 'ocean');
+        ocean = game.add.sprite(0, game.world.height - 237, 'ocean');
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
