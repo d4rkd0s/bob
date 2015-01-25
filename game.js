@@ -15,7 +15,7 @@ window.onload = function() {
         
         game.load.image('bob', 'assets/images/bob.png');
         game.load.image('background', 'assets/images/background.png');
-        //game.load.image('ground', 'assets/images/ground.png');
+        game.load.image('ocean', 'assets/images/ocean.png');
         cursors = game.input.keyboard.createCursorKeys();
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
         
@@ -35,8 +35,8 @@ window.onload = function() {
 
 
         //sound
-        jumpsound = game.add.audio('jumpsound');
-        jumpsound.allowMultiple = false;
+        //jumpsound = game.add.audio('jumpsound');
+        //jumpsound.allowMultiple = false;
 
         //hiding this for now its in the way
         //var fatty1 = game.add.sprite(0, 0, 'fatty1');
@@ -45,7 +45,7 @@ window.onload = function() {
         //Uncaught TypeError: Cannot read property 'velocity' of null
         //fatty1.body.velocity.x=20;
 
-        ground = game.add.sprite(0, game.world.height - 92, 'ground');
+        ocean = game.add.sprite(0, game.world.height - 300, 'ocean');
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
@@ -53,17 +53,17 @@ window.onload = function() {
         //fatty3 = game.add.sprite(450, game.world.height - 300, 'fatty3');
     
 
-        //ground
-        game.physics.enable(ground, Phaser.Physics.ARCADE);
-        ground.body.immovable = true;
+        //ocean
+        game.physics.enable(ocean, Phaser.Physics.ARCADE);
+        ocean.body.immovable = true;
 
         //start physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
         //Player physics properties. 
-        player.body.bounce.y = 0.3;
-        player.body.gravity.y = 800;
+        //player.body.bounce.y = 0.3;
+        //player.body.gravity.y = 800;
         player.body.collideWorldBounds = true;
         
         //start the player looking right
@@ -74,8 +74,8 @@ window.onload = function() {
     function update() {
         
 
-        //ground collision
-        game.physics.arcade.collide(player, ground);
+        //ocean collision
+        game.physics.arcade.collide(player, ocean);
 
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
@@ -96,18 +96,21 @@ window.onload = function() {
             //lookdir = "right";
             
         }
+        else if (cursors.up.isDown)
+        {
+          //  Move to the right
+          player.body.velocity.y = 200; 
+
+        }
+        else if (cursors.down.isDown)
+        {
+          //  Move to the right
+          player.body.velocity.y = -200; 
+           
+        }
         else
         {
-            
-        }
-        
 
-        //  Allow the player to jump if they are touching the ground.
-        if (cursors.up.isDown && player.y > 430)
-        {
-            jumpsound.play();
-            player.body.velocity.y = -450;
-            
         }
     
 
