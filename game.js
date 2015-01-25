@@ -86,14 +86,14 @@ window.onload = function() {
             if (cursors.up.isDown)
             {
                 //  Move to the left+up
-                player.body.velocity.x = -90;
-                player.body.velocity.y = -90;
+                player.body.velocity.x = -100;
+                player.body.velocity.y = -100;
             }
             else if (cursors.down.isDown)
             {
                 //  Move to the left+down
-                player.body.velocity.x = -90;
-                player.body.velocity.y = 90;
+                player.body.velocity.x = -100;
+                player.body.velocity.y = 100;
             }
             else
             {
@@ -102,11 +102,27 @@ window.onload = function() {
             }
             
         }
-        
+
         else if (cursors.right.isDown)
         {
-            //  Move to the right
-            player.body.velocity.x = 180;
+            if (cursors.up.isDown)
+            {
+                //  Move to the right+up
+                player.body.velocity.x = 100;
+                player.body.velocity.y = -100;
+            }
+            else if (cursors.down.isDown)
+            {
+                //  Move to the right+down
+                player.body.velocity.x = 100;
+                player.body.velocity.y = 100;
+            }
+            else
+            {
+                //  Move to the right
+                player.body.velocity.x = 180;
+            }
+            
         }
         else if (cursors.up.isDown)
         {
