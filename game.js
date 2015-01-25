@@ -33,6 +33,10 @@ window.onload = function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
 
+        //score
+        var text = "Score" . score;
+        var style = { font: "42px Arial", fill: "#5CA6FF", align: "center" };
+        var t = game.add.text(40, 40, text, style);
 
         //sound
         //jumpsound = game.add.audio('jumpsound');
