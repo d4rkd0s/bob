@@ -36,7 +36,8 @@ window.onload = function() {
         
 
         //score
-        
+        active = 1;
+        foot = 1;
 
         //sound
         //jumpsound = game.add.audio('jumpsound');
@@ -136,8 +137,6 @@ window.onload = function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
-            active = 1;
-            foot = 1;
             player.body.velocity.y = 180; 
             switchFeet();
         }
