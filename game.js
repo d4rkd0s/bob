@@ -13,7 +13,8 @@ window.onload = function() {
 
     function preload() {
         
-        game.load.image('bob', 'assets/images/bob.png');
+        //game.load.image('bob', 'assets/images/bob.png');
+        game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         game.load.image('background', 'assets/images/background.png');
         game.load.image('ocean', 'assets/images/ocean.png');
         cursors = game.input.keyboard.createCursorKeys();
@@ -31,7 +32,8 @@ window.onload = function() {
         game.add.sprite(0, 0, 'background');
 
         //Game Objects
-        player = game.add.sprite(775, game.world.height - 150, 'bob');
+        var player = game.add.sprite(775, game.world.height - 150, 'bob');
+        
 
         //score
         
@@ -134,6 +136,7 @@ window.onload = function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
+            player.frame("3");
             player.body.velocity.y = 180; 
         }
 
