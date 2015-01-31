@@ -88,21 +88,21 @@ window.onload = function() {
 
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
-        console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
+        console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         ocean.body.immovable = true;
         console.log("%c   locked: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #A40E38;");
 
         //start physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
+        console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
-        console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
+        console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         //Player physics properties. 
         //player.body.bounce.y = 0.3;
         //player.body.gravity.y = 800;
         player.body.collideWorldBounds = true;
-        console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
+        console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         //start the player looking right
         //lookdir = "right";
         
