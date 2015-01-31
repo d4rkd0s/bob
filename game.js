@@ -57,6 +57,10 @@ window.onload = function() {
         active = 1;
         foot = 1;
 
+        text = "Score: " . score;
+        style = { font: "32px Arial", fill: "#3D4185", align: "center" };
+
+        t = game.add.text(game.world.centerX-300, 0, text, style);
         //sound
         //jumpsound = game.add.audio('jumpsound');
         //jumpsound.allowMultiple = false;
