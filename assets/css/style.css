@@ -16,3 +16,57 @@
 	top: 305px;
 	width: 228px;
 }
+.container {
+    width: 18em;
+    height: 8em;
+    margin: 1em auto;
+    overflow: hidden;
+    background: white;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.marquee {
+    top: 6em;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 15s linear infinite;
+}
+
+.marquee:hover {
+    animation-play-state: paused;
+}
+
+/* Make it move! */
+@keyframes marquee {
+    0%   { top:   8em }
+    100% { top: -11em }
+}
+
+/* Make it look pretty */
+.smoothy .marquee {
+	margin: 0;
+    padding: 0 1em;
+    line-height: 1.5em;
+    font: 1em 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+}
+
+.smoothy:before, .smoothy::before,
+.smoothy:after,  .smoothy::after {
+    left: 0;
+    z-index: 1;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 2em;
+    background-image: linear-gradient(180deg, #FFF, rgba(255,255,255,0));
+}
+
+.smoothy:after, .smoothy::after {
+    bottom: 0;
+    transform: rotate(180deg);
+}
+
+.smoothy:before, .smoothy::before {
+    top: 0;
+}

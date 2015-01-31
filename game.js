@@ -1,13 +1,9 @@
 $(function() {
-
-window.onload = function() {
-
+    window.onload = function() {
     console.log("%c  ~~~  Bob v0.2 - Developed by d4rkd0s  ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
-
     var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-    
-
     function preload() {
+        //setting up starting vars
         score = 0;
         console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         lives = 3;
@@ -26,35 +22,29 @@ window.onload = function() {
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
         
-
         //walking case switch
-        
-            function coroutine(f) {
-               var o = f(); // instantiate the coroutine
-               o.next(); // execute until the first yield
-               return function(x) {
-                   o.next(x);
-               }
-           }
-           var clock = coroutine(function*(_) {
-               while (true) {
-                   yield _;
-                   foot = 0;
-                   yield _;
-                   foot = 1;
-               }
-           });
+        function coroutine(f) {
+           var o = f(); // instantiate the coroutine
+           o.next(); // execute until the first yield
+           return function(x) {
+                o.next(x);
+            }
+        }
+        var clock = coroutine(function*(_) {
+            while (true) {
+                yield _;
+                foot = 0;
+                yield _;
+                foot = 1;
+            }
+        });
 
-           //walk step speed in ms
-           setInterval(clock, 100);
-           //notify user (console)
-           console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-           }//preload
+        //walk step speed in ms
+        setInterval(clock, 100);
+        //notify user (console)
+        console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+    }//preload
     
-    
-
-
-
     function create() {
 
         //  A simple background for our game
@@ -66,28 +56,17 @@ window.onload = function() {
 
         //text = "Score: " . score;
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
-
         //game.add.text(game.world.centerX-300, 0, text, style);
         //sound
         //jumpsound = game.add.audio('jumpsound');
         //jumpsound.allowMultiple = false;
 
-        //hiding this for now its in the way
-        //var fatty1 = game.add.sprite(0, 0, 'fatty1');
-        
-
-        //Uncaught TypeError: Cannot read property 'velocity' of null
-        //fatty1.body.velocity.x=20;
-
         ocean = game.add.sprite(0, game.world.height - 635, 'ocean');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
-    
-
+        
+        //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
         
-        
-    
-
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
         console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
@@ -100,19 +79,13 @@ window.onload = function() {
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
         console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
-        //Player physics properties. 
-        //player.body.bounce.y = 0.3;
-        //player.body.gravity.y = 800;
+        game.physics.arcade.enable(player);
+        game.physics.arcade.enableBody(player);
         player.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
-        //start the player looking right
-        //lookdir = "right";
-        
-    }
+    }//create()
     
     function update() {
-        
-
         //ocean collision
         game.physics.arcade.collide(player, ocean);
 
