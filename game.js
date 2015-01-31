@@ -136,14 +136,28 @@ window.onload = function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
-            player.frame = 3;
             player.body.velocity.y = 180; 
+            player.frame = 0;
+            player.frame = 1;
         }
 
+    //animations
+
+    //down
+    function animDown() {
+        function setDownL() {
+            player.frame = 0;
+        }
+        function setDownR() {
+            player.frame = 0;
+        }
+    setTimeout(setDownL(), 300);
+    setTimeout(setDownR(), 100);
     
+    }
 
 
-        }
+        } //update
     
 };
 });
