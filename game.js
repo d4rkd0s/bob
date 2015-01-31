@@ -149,7 +149,7 @@ window.onload = function() {
             player.frame = 0;
         }
         function setDownR() {
-            player.frame = 0;
+            player.frame = 1;
         }
     setTimeout(setDownL(), 300);
     setTimeout(setDownR(), 100);
