@@ -19,6 +19,8 @@ window.onload = function() {
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
+        console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('horse', 'assets/images/horse.png');
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -81,9 +83,9 @@ window.onload = function() {
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
     
 
-        //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
-        //fatty2 = game.add.sprite(450, game.world.height - 300, 'fatty2');
-        //fatty3 = game.add.sprite(450, game.world.height - 300, 'fatty3');
+        horse = game.add.sprite(450, game.world.height - 300, 'horse');
+        
+        
     
 
         //ocean
