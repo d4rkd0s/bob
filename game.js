@@ -2,25 +2,31 @@ $(function() {
 
 window.onload = function() {
 
-    console.log("%cBob v0.2 - Developed by d4rkd0s", "color: #3D4185; font-size: small");
+    console.log("%c   Bob v0.2 - Developed by d4rkd0s   ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
 
     var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
     score = 0;
+    console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     lives = 3;
+    console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
     function preload() {
         
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
+        console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('background', 'assets/images/background.png');
+        console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
+        console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
+        console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
         
 
         //walking case switch
-
+        
             function coroutine(f) {
                var o = f(); // instantiate the coroutine
                o.next(); // execute until the first yield
@@ -39,7 +45,8 @@ window.onload = function() {
 
            //walk step speed in ms
            setInterval(clock, 100);
-
+           //notify user (console)
+           console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
            }//preload
     
     
@@ -50,19 +57,15 @@ window.onload = function() {
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
-
+        console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
-        
+        console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
-        //score
-        active = 1;
-        foot = 1;
+        //text = "Score: " . score;
+        //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
 
-        text = "Score: " . score;
-        style = { font: "32px Arial", fill: "#3D4185", align: "center" };
-
-        game.add.text(game.world.centerX-300, 0, text, style);
+        //game.add.text(game.world.centerX-300, 0, text, style);
         //sound
         //jumpsound = game.add.audio('jumpsound');
         //jumpsound.allowMultiple = false;
@@ -75,6 +78,7 @@ window.onload = function() {
         //fatty1.body.velocity.x=20;
 
         ocean = game.add.sprite(0, game.world.height - 635, 'ocean');
+        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
@@ -84,17 +88,21 @@ window.onload = function() {
 
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
+        console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         ocean.body.immovable = true;
+        console.log("%c   locked: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
         //start physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
+        console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //Player physics properties. 
         //player.body.bounce.y = 0.3;
         //player.body.gravity.y = 800;
         player.body.collideWorldBounds = true;
-        
+        console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //start the player looking right
         //lookdir = "right";
         
@@ -109,6 +117,7 @@ window.onload = function() {
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
+        
 
         if (cursors.left.isDown)
         {
