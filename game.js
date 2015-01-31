@@ -20,7 +20,24 @@ window.onload = function() {
         cursors = game.input.keyboard.createCursorKeys();
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
         
-    }
+            function coroutine(f) {
+               var o = f(); // instantiate the coroutine
+               o.next(); // execute until the first yield
+               return function(x) {
+                   o.next(x);
+               }
+           }
+           var clock = coroutine(function*(_) {
+               while (true) {
+                   yield _;
+                   player.frame = 0;
+                   yield _;
+                   player.frame = 1;
+               }
+           });
+           setInterval(clock, 1000);
+
+           }
     
     
 
@@ -147,25 +164,7 @@ window.onload = function() {
             player.body.velocity.y = 180; 
         }
 
-    //animations
 
-    //down
-    function coroutine(f) {
-        var o = f(); // instantiate the coroutine
-        o.next(); // execute until the first yield
-        return function(x) {
-            o.next(x);
-        }
-    }
-    var clock = coroutine(function*(_) {
-        while (true) {
-            yield _;
-            player.frame = 0;
-            yield _;
-            player.frame = 1;
-        }
-    });
-    setInterval(clock, 10000);
 
 
         } //update
