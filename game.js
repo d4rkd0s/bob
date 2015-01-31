@@ -145,7 +145,6 @@ window.onload = function() {
         {
             //  Move to the down
             player.body.velocity.y = 180; 
-            
         }
 
     //animations
@@ -166,30 +165,7 @@ window.onload = function() {
             player.frame = 1;
         }
     });
-    setInterval(clock, 1000);
-
-    function switchFeet() {
-        if ( foot == 1 && active == 1 ){
-            active = 0;
-            foot = 2;
-            setTimeout(setDownRight(), 500);
-            function setDownRight() {
-                player.frame = 1;
-                active = 1;
-            }//function setDownRight
-        }//if ( foot == 1 & active == 1 )
-
-        if ( foot == 2 && active == 1 ){
-            active = 0;
-            foot = 1;
-            setTimeout(setDownLeft(), 500);
-            function setDownLeft() {
-                player.frame = 0;
-                active = 1;
-            }//function setDownRight
-        }
-    
-    }//animDown
+    setInterval(clock, 10000);
 
 
         } //update
