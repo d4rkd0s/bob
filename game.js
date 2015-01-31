@@ -146,6 +146,25 @@ window.onload = function() {
             //  Move to the down
             player.body.velocity.y = 180; 
             player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
+            player.frame = 0;
+            player.frame = 1;
         }
 
     //animations
