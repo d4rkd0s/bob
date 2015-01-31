@@ -30,12 +30,12 @@ window.onload = function() {
            var clock = coroutine(function*(_) {
                while (true) {
                    yield _;
-                   player.frame = 0;
+                   foot = 0;
                    yield _;
-                   player.frame = 1;
+                   foot = 1;
                }
            });
-           setInterval(clock, 1000);
+           setInterval(clock, 300);
 
            }
     
@@ -162,6 +162,13 @@ window.onload = function() {
         {
             //  Move to the down
             player.body.velocity.y = 180; 
+            if ( foot == 0 ){
+               player.frame = 0; 
+            }
+            if ( foot == 1 ){
+               player.frame = 1; 
+            }
+           
         }
 
 
