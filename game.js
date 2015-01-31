@@ -2,6 +2,8 @@ $(function() {
 
 window.onload = function() {
 
+    console.log("%cBob v0.2 - Developed by d4rkd0s", "color: #3D4185; font-size: 16pt");
+
     var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
     score = 0;
