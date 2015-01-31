@@ -2,17 +2,17 @@ $(function() {
 
 window.onload = function() {
 
-    console.log("%c   Bob v0.2 - Developed by d4rkd0s   ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
+    console.log("%c  ~~~  Bob v0.2 - Developed by d4rkd0s  ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
 
     var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
-    score = 0;
-    console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-    lives = 3;
-    console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
     function preload() {
-        
+        score = 0;
+        console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
+        lives = 3;
+        console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
+
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -57,10 +57,10 @@ window.onload = function() {
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
-        console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
-        console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
 
         //text = "Score: " . score;
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
@@ -78,7 +78,7 @@ window.onload = function() {
         //fatty1.body.velocity.x=20;
 
         ocean = game.add.sprite(0, game.world.height - 635, 'ocean');
-        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
@@ -88,21 +88,21 @@ window.onload = function() {
 
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
-        console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
         ocean.body.immovable = true;
-        console.log("%c   locked: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   locked: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #A40E38;");
 
         //start physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
-        console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
         //Player physics properties. 
         //player.body.bounce.y = 0.3;
         //player.body.gravity.y = 800;
         player.body.collideWorldBounds = true;
-        console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #70F885;");
         //start the player looking right
         //lookdir = "right";
         
@@ -117,7 +117,7 @@ window.onload = function() {
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
-        
+
 
         if (cursors.left.isDown)
         {
