@@ -4,12 +4,8 @@ window.onload = function() {
 
     var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
-    var jumping = "0";
-
-    var score = 0;
-    var lives = 3;
-
-    var lookdir;
+    score = 0;
+    lives = 3;
 
     function preload() {
         
@@ -20,6 +16,9 @@ window.onload = function() {
         cursors = game.input.keyboard.createCursorKeys();
         //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
         
+
+        //walking case switch
+
             function coroutine(f) {
                var o = f(); // instantiate the coroutine
                o.next(); // execute until the first yield
@@ -35,10 +34,11 @@ window.onload = function() {
                    foot = 1;
                }
            });
+
            //walk step speed in ms
            setInterval(clock, 100);
 
-           }
+           }//preload
     
     
 
