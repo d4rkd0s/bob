@@ -35,7 +35,8 @@ window.onload = function() {
                    foot = 1;
                }
            });
-           setInterval(clock, 300);
+           //walk step speed in ms
+           setInterval(clock, 100);
 
            }
     
@@ -110,20 +111,35 @@ window.onload = function() {
                 //  Move to the left+up
                 player.body.velocity.x = -100;
                 player.body.velocity.y = -100;
-                player.frame = 4;
+                if ( foot == 0 ){
+                    player.frame = 4; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 5; 
+                }
             }
             else if (cursors.down.isDown)
             {
                 //  Move to the left+down
                 player.body.velocity.x = -100;
                 player.body.velocity.y = 100;
-                player.frame = 4;
+                if ( foot == 0 ){
+                    player.frame = 4; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 5; 
+                }
             }
             else
             {
                 //  Move to the left
                 player.body.velocity.x = -180;
-                player.frame = 4;
+                if ( foot == 0 ){
+                    player.frame = 4; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 5; 
+                }
             }
             
         }
@@ -135,20 +151,35 @@ window.onload = function() {
                 //  Move to the right+up
                 player.body.velocity.x = 100;
                 player.body.velocity.y = -100;
-                player.frame = 7;
+                if ( foot == 0 ){
+                    player.frame = 6; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 7; 
+                }
             }
             else if (cursors.down.isDown)
             {
                 //  Move to the right+down
                 player.body.velocity.x = 100;
                 player.body.velocity.y = 100;
-                player.frame = 7;
+                if ( foot == 0 ){
+                    player.frame = 6; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 7; 
+                }
             }
             else
             {
                 //  Move to the right
                 player.body.velocity.x = 180;
-                player.frame = 7;
+                if ( foot == 0 ){
+                    player.frame = 6; 
+                }
+                if ( foot == 1 ){
+                   player.frame = 7; 
+                }
             }
             
         }
@@ -156,7 +187,12 @@ window.onload = function() {
         {
             //  Move to the up
             player.body.velocity.y = -180; 
-            player.frame = 2;
+            if ( foot == 0 ){
+               player.frame = 2; 
+            }
+            if ( foot == 1 ){
+               player.frame = 3; 
+            }
         }
         else if (cursors.down.isDown)
         {
