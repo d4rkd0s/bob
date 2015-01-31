@@ -151,6 +151,13 @@ window.onload = function() {
     //animations
 
     //down
+    function coroutine(f) {
+        var o = f(); // instantiate the coroutine
+        o.next(); // execute until the first yield
+        return function(x) {
+            o.next(x);
+        }
+    }
     var clock = coroutine(function*(_) {
         while (true) {
             yield _;
