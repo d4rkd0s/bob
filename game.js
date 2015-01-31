@@ -146,7 +146,6 @@ window.onload = function() {
     function animDown() {
         function setDownL() {
             player.frame = 0;
-            setTimeout(setDownR(), 500);
         }
         function setDownR() {
             player.frame = 1;
