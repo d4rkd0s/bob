@@ -146,14 +146,15 @@ window.onload = function() {
     function animDown() {
         function setDownL() {
             player.frame = 0;
+            setTimeout(setDownR(), 500);
         }
         function setDownR() {
             player.frame = 1;
+            setTimeout(setDownL(), 500);
         }
-    setTimeout(setDownL(), 300);
-    setTimeout(setDownR(), 100);
+    setTimeout(setDownR(), 500);
     
-    }
+    }//animDown
 
 
         } //update
