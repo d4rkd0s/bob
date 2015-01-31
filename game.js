@@ -136,7 +136,7 @@ window.onload = function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
-            player.frame(3);
+            player.frame = 3;
             player.body.velocity.y = 180; 
         }
 
