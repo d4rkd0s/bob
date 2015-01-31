@@ -32,7 +32,7 @@ window.onload = function() {
         game.add.sprite(0, 0, 'background');
 
         //Game Objects
-        var player = game.add.sprite(775, game.world.height - 150, 'bob');
+        player = game.add.sprite(775, game.world.height - 150, 'bob');
         
 
         //score
