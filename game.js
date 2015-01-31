@@ -93,17 +93,20 @@ window.onload = function() {
                 //  Move to the left+up
                 player.body.velocity.x = -100;
                 player.body.velocity.y = -100;
+                player.frame = 4;
             }
             else if (cursors.down.isDown)
             {
                 //  Move to the left+down
                 player.body.velocity.x = -100;
                 player.body.velocity.y = 100;
+                player.frame = 4;
             }
             else
             {
                 //  Move to the left
                 player.body.velocity.x = -180;
+                player.frame = 4;
             }
             
         }
@@ -115,17 +118,20 @@ window.onload = function() {
                 //  Move to the right+up
                 player.body.velocity.x = 100;
                 player.body.velocity.y = -100;
+                player.frame = 7;
             }
             else if (cursors.down.isDown)
             {
                 //  Move to the right+down
                 player.body.velocity.x = 100;
                 player.body.velocity.y = 100;
+                player.frame = 7;
             }
             else
             {
                 //  Move to the right
                 player.body.velocity.x = 180;
+                player.frame = 7;
             }
             
         }
@@ -133,12 +139,13 @@ window.onload = function() {
         {
             //  Move to the up
             player.body.velocity.y = -180; 
+            player.frame = 2;
         }
         else if (cursors.down.isDown)
         {
             //  Move to the down
             player.body.velocity.y = 180; 
-            switchFeet();
+            player.frame = 0;
         }
 
     //animations
