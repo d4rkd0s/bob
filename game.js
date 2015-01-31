@@ -145,31 +145,22 @@ window.onload = function() {
         {
             //  Move to the down
             player.body.velocity.y = 180; 
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
-            player.frame = 0;
-            player.frame = 1;
+            
         }
 
     //animations
 
     //down
+    var clock = coroutine(function*(_) {
+        while (true) {
+            yield _;
+            player.frame = 0;
+            yield _;
+            player.frame = 1;
+        }
+    });
+    setInterval(clock, 1000);
+
     function switchFeet() {
         if ( foot == 1 && active == 1 ){
             active = 0;
