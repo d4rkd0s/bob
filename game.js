@@ -136,22 +136,35 @@ window.onload = function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
+            active = 1;
+            foot = 1;
             player.body.velocity.y = 180; 
-            animDown();
+            switchFeet();
         }
 
     //animations
 
     //down
-    function animDown() {
-        function setDownL() {
-            player.frame = 0;
+    function switchFeet() {
+        if ( foot == 1 && active == 1 ){
+            active = 0;
+            foot = 2;
+            setTimeout(setDownRight(), 500);
+            function setDownRight() {
+                player.frame = 1;
+                active = 1;
+            }//function setDownRight
+        }//if ( foot == 1 & active == 1 )
+
+        if ( foot == 2 && active == 1 ){
+            active = 0;
+            foot = 1;
+            setTimeout(setDownLeft(), 500);
+            function setDownLeft() {
+                player.frame = 0;
+                active = 1;
+            }//function setDownRight
         }
-        function setDownR() {
-            player.frame = 1;
-            setTimeout(setDownL(), 500);
-        }
-    setTimeout(setDownR(), 500);
     
     }//animDown
 
