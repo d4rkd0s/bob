@@ -47,7 +47,7 @@ window.onload = function() {
         //Uncaught TypeError: Cannot read property 'velocity' of null
         //fatty1.body.velocity.x=20;
 
-        ocean = game.add.sprite(0, game.world.height - 625, 'ocean');
+        ocean = game.add.sprite(0, game.world.height - 635, 'ocean');
     
 
         //fatty1 = game.add.sprite(450, game.world.height - 300, 'fatty1');
