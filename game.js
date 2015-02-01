@@ -14,6 +14,8 @@ $(function() {
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('healthbar', 'assets/images/healthbar.png');
+        console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
         console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('horse', 'assets/images/horse.png');
@@ -53,6 +55,10 @@ $(function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+
+        var healthbar = this.game.add.sprite(0,0,'healthbar');
+        healthbar.cropEnabled = true;
+        healthbar.crop.width = (character.health / character.maxHealth) * healthbar.width
 
         //text = "Score: " . score;
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
