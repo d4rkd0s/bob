@@ -104,6 +104,9 @@ $(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
+        if ( Phaser.Keyboard.SPACEBAR == true ){
+            horse.velocity = game.physics.arcade.velocityFromAngle(angle, 500);
+        }
 
         if (cursors.left.isDown)
         {
