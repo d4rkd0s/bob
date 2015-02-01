@@ -115,7 +115,7 @@ $(function() {
         player.body.velocity.y = 0;
 
         //bob faster as he scores
-        speed = 100+(6*score);
+        speed = 200+(10*score);
         
         //move mr.horse
         horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
