@@ -104,7 +104,7 @@ $(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
-        if ( Phaser.Keyboard.SPACEBAR = true ){
+        if ( Phaser.Keyboard.SPACEBAR == true ){
             horse.velocity = game.physics.arcade.accelerateToObject(horse, player, 100, 50, 50);
         }
 
