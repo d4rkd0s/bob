@@ -150,7 +150,7 @@ $(function() {
                     randX = Math.floor(Math.random()*(800-50+1)+50);
                     randY = Math.floor(Math.random()*(550-180+1)+180);
                 }
-                
+                 
             }
             else{
                 console.log("out");
