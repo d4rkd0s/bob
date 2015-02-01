@@ -6,8 +6,8 @@ $(function() {
         //setting up starting vars
         score = 0;
         console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
-        lives = 3;
-        console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
+        horseHealth = 3;
+        console.log("%c   horseHealth: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
 
         speed = 250;
         //game.load.image('bob', 'assets/images/bob.png');
@@ -119,16 +119,19 @@ $(function() {
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
                 applesound.play();
-                $( "#score" ).text(score + " apples");
+                $( "#score" ).text("Score: " + score);
                 apple.kill();
-                console.log(score);
+                console.log("Score: " + score);
             }
             if ( game.physics.arcade.collide(apple, horse) == true ){
-                score = score - 1;
-                $( "#score" ).text(score + " apples");
+                horseHealth = horseHealth - 1;
+                $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
                 //losesound.play();
                 apple.kill();
-                console.log(score);
+                if ( horseHealth == 0 ){
+                    game.physics.destroy();
+                }
+                console.log("horseHealth: " + horseHealth);
             }
         }
         else{
