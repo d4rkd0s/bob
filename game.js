@@ -114,9 +114,11 @@ $(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
+        //bob faster as he scores
+        speed = 100+(6*score);
         
         //move mr.horse
-        horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*10), 50+(score*10), 50+(score*10));
+        horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
         
 
         if ( apple.alive == true){
