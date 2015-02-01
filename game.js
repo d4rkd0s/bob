@@ -1,7 +1,7 @@
 $(function() {
     window.onload = function() {
     console.log("%c  ~~~  Bob v0.2 - Developed by d4rkd0s  ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
-    var game = new Phaser.Game(1536, 864, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var game = new Phaser.Game(1156, 650, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     function preload() {
         //setting up starting vars
         score = 0;
