@@ -56,7 +56,7 @@ $(function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
-        apple = game.add.sprite(500, 200, 'apple');
+        apple = game.add.sprite(game.world.width / 2, game.world.height / 2, 'apple');
 
         //var healthbar = game.add.sprite(0,0,'healthbar');
         //healthbar.cropEnabled = true;
@@ -93,6 +93,7 @@ $(function() {
         game.physics.arcade.enableBody(apple);
         player.body.collideWorldBounds = true;
         horse.body.collideWorldBounds = true;
+        apple.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
     }//create()
     
@@ -110,7 +111,7 @@ $(function() {
 
         horse.velocity = game.physics.arcade.accelerateToObject(horse, player, 50, 50, 50);
 
-        if ( apple.alive() == true){
+        if ( apple.alive == true){
             console.log("Apple is alive");
         }
         else{
