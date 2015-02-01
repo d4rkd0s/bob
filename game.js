@@ -102,7 +102,6 @@ $(function() {
         //ocean collision
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
-        game.physics.arcade.collide(player, apple);
         game.physics.arcade.collide(ocean, apple);
         game.physics.arcade.collide(horse, ocean);
         //horse.body.accelerateToObject(horse, player, 600, 250, 250);
@@ -116,7 +115,7 @@ $(function() {
     
 
         if ( apple.alive == true){
-            if ( game.physics.arcade.collide(apple, player) == true ){
+            if ( game.physics.arcade.intersets(apple, player) == true ){
                 score = score + 1;
                 apple.kill();
                 console.log(score);
