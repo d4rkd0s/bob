@@ -89,6 +89,8 @@ $(function() {
         console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         game.physics.arcade.enable(horse);
         game.physics.arcade.enableBody(horse);
+        game.physics.arcade.enable(apple);
+        game.physics.arcade.enableBody(apple);
         player.body.collideWorldBounds = true;
         horse.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
