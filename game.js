@@ -115,7 +115,7 @@ $(function() {
         randY = Math.floor(Math.random()*(300-50+1)+50);
 
         if ( apple.alive == true){
-            if ( game.physics.arcade.collide(apple, player) = true ){
+            if ( game.physics.arcade.collide(apple, player) == true ){
                 score = score + 1;
                 apple.kill();
                 console.log(score);
