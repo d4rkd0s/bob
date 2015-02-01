@@ -134,8 +134,6 @@ $(function() {
                 //losesound.play();
                 apple.kill();
                 if ( horseHealth == 0 ){
-                    url = "credits.html";
-                    $( "#credits" ).text("Lead Developer - d4rkd0s");
                     $( "#score" ).text("Final Score: " + score);
                     $( "#horseHealth" ).text("Your horse has died!");
                     game.physics.destroy();
