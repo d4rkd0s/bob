@@ -12,6 +12,7 @@ $(function() {
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('apple', 'assets/images/apple_red.png');
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.image('healthbar', 'assets/images/healthbar.png');
@@ -55,6 +56,7 @@ $(function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+        applee = game.add.sprite(500, 200, 'apple');
 
         //var healthbar = game.add.sprite(0,0,'healthbar');
         //healthbar.cropEnabled = true;
