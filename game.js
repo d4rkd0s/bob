@@ -109,13 +109,20 @@ $(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
-        horse.velocity = game.physics.arcade.accelerateToObject(horse, player, 50, 50, 50);
+        horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50, 50, 50);
+
+        randX = Math.floor(Math.random()*(800-50+1)+50);
+        randY = Math.floor(Math.random()*(300-50+1)+50);
 
         if ( apple.alive == true){
-            console.log("Apple is alive");
+            if ( distanceBetween(apple, player) <= 10 ){
+                score = score + 1;
+                apple.kill();
+                console.log(score);
+            }
         }
         else{
-            console.log("Apple is not alive");
+            apple = game.add.sprite(randX, randY, 'apple');
         }
 
         if (cursors.left.isDown)
