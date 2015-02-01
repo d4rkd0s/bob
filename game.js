@@ -125,7 +125,12 @@ $(function() {
             }
             if ( game.physics.arcade.collide(apple, horse) == true ){
                 horseHealth = horseHealth - 1;
-                $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
+                if ( horseHealth == 1 ){
+                    $( "#horseHealth" ).text(horseHealth + " apple until your horse dies!");
+                }
+                else{
+                    $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
+                }
                 //losesound.play();
                 apple.kill();
                 if ( horseHealth == 0 ){
