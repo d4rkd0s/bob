@@ -57,7 +57,7 @@ $(function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
-        apple = game.add.sprite(game.world.width / 2, game.world.height / 2, 'apple');
+        apple = game.add.sprite(100, 100, 'apple');
 
         //var healthbar = game.add.sprite(0,0,'healthbar');
         //healthbar.cropEnabled = true;
@@ -144,7 +144,7 @@ $(function() {
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
             randY = Math.floor(Math.random()*(550-180+1)+180);
-            if ( randX < horse.x+100 && randX > horse.x-100 ){
+            if ( randX > horse.x+100 && randX < horse.x-100 ){
                 console.log("in");
             }
             else{
