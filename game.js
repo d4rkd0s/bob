@@ -96,6 +96,8 @@ $(function() {
         //ocean collision
         game.physics.arcade.collide(player, ocean);
 
+        horse.accelerateToObject(horse, player, 600, 250, 250);
+
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
