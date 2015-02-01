@@ -113,8 +113,8 @@ $(function() {
 
         horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50, 50, 50);
 
-        randX = Math.floor(Math.random()*(800-50+1)+50);
-        randY = Math.floor(Math.random()*(300-50+1)+50);
+        randY = Math.floor(Math.random()*(800-50+1)+50);
+        randX = Math.floor(Math.random()*(300-50+1)+50);
 
         if ( apple.alive == true){
             if ( game.physics.arcade.collide(apple, player) == true ){
