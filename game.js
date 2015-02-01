@@ -102,7 +102,7 @@ $(function() {
         //ocean collision
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
-
+        game.physics.arcade.collide(player, apple);
         //horse.body.accelerateToObject(horse, player, 600, 250, 250);
 
         //  Reset the players velocity (movement)
@@ -115,7 +115,7 @@ $(function() {
         randY = Math.floor(Math.random()*(300-50+1)+50);
 
         if ( apple.alive == true){
-            if ( game.physics.arcade.distanceBetween(apple, player) <= 10 ){
+            if ( game.physics.arcade.collide(apple, player) ){
                 score = score + 1;
                 apple.kill();
                 console.log(score);
