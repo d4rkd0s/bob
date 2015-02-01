@@ -25,7 +25,7 @@ $(function() {
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
-        
+        game.load.audio('bobsound', 'assets/sounds/bob.wav')
         //walking case switch
         function coroutine(f) {
            var o = f(); // instantiate the coroutine
@@ -68,7 +68,10 @@ $(function() {
         //game.add.text(game.world.centerX-300, 0, text, style);
         //sound
         applesound = game.add.audio('applesound');
-        applesound.allowMultiple = false;
+        applesound.allowMultiple = true;
+
+        bobsound = game.add.audio('bobsound');
+        bobsound.allowMultiple = true;
 
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
@@ -118,7 +121,7 @@ $(function() {
         if ( apple.alive == true){
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
-                applesound.play();
+                bobsound.play();
                 $( "#score" ).text("Score: " + score);
                 apple.kill();
                 console.log("Score: " + score);
@@ -131,7 +134,7 @@ $(function() {
                 else{
                     $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
                 }
-                //losesound.play();
+                applesound.play();
                 apple.kill();
                 if ( horseHealth == 0 ){
                     $( "#score" ).text("Final Score: " + score);
