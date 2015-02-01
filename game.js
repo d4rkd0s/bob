@@ -9,7 +9,7 @@ $(function() {
         lives = 3;
         console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
 
-        speed = 200;
+        speed = 250;
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -169,7 +169,7 @@ $(function() {
             else
             {
                 //  Move to the left
-                player.body.velocity.x = -speed*1.8;
+                player.body.velocity.x = -speed*2;
                 if ( foot == 0 ){
                     player.frame = 4; 
                 }
@@ -209,7 +209,7 @@ $(function() {
             else
             {
                 //  Move to the right
-                player.body.velocity.x = speed*1.8;
+                player.body.velocity.x = speed*2;
                 if ( foot == 0 ){
                     player.frame = 6; 
                 }
