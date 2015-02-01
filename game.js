@@ -56,7 +56,7 @@ $(function() {
         //Game Objects
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
-        applee = game.add.sprite(500, 200, 'apple');
+        apple = game.add.sprite(500, 200, 'apple');
 
         //var healthbar = game.add.sprite(0,0,'healthbar');
         //healthbar.cropEnabled = true;
