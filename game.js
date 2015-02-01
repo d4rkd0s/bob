@@ -96,7 +96,11 @@ $(function() {
         //ocean collision
         game.physics.arcade.collide(player, ocean);
 
-        horse.body.accelerateToObject(horse, player, 600, 250, 250);
+        if ( Phaser.Keyboard.SPACEBAR == true ){
+            Time.slowMotion = 2.0;
+        }
+
+        //horse.body.accelerateToObject(horse, player, 600, 250, 250);
 
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
