@@ -85,9 +85,9 @@ $(function() {
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
         console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
-        game.physics.arcade.enable(player);
-        game.physics.arcade.enableBody(player);
-        player.body.collideWorldBounds = true;
+        game.physics.arcade.enable(horse);
+        game.physics.arcade.enableBody(horse);
+        horse.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
     }//create()
     
@@ -96,7 +96,7 @@ $(function() {
         //ocean collision
         game.physics.arcade.collide(player, ocean);
 
-        horse.accelerateToObject(horse, player, 600, 250, 250);
+        horse.body.accelerateToObject(horse, player, 600, 250, 250);
 
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
