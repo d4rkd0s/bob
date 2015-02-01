@@ -9,6 +9,7 @@ $(function() {
         lives = 3;
         console.log("%c   lives: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
 
+        speed = 200;
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -142,8 +143,8 @@ $(function() {
             if (cursors.up.isDown)
             {
                 //  Move to the left+up
-                player.body.velocity.x = -100;
-                player.body.velocity.y = -100;
+                player.body.velocity.x = -speed;
+                player.body.velocity.y = -speed;
                 if ( foot == 0 ){
                     player.frame = 4; 
                 }
@@ -154,8 +155,8 @@ $(function() {
             else if (cursors.down.isDown)
             {
                 //  Move to the left+down
-                player.body.velocity.x = -100;
-                player.body.velocity.y = 100;
+                player.body.velocity.x = -speed;
+                player.body.velocity.y = speed;
                 if ( foot == 0 ){
                     player.frame = 4; 
                 }
@@ -166,7 +167,7 @@ $(function() {
             else
             {
                 //  Move to the left
-                player.body.velocity.x = -180;
+                player.body.velocity.x = -speed*1.8;
                 if ( foot == 0 ){
                     player.frame = 4; 
                 }
@@ -182,8 +183,8 @@ $(function() {
             if (cursors.up.isDown)
             {
                 //  Move to the right+up
-                player.body.velocity.x = 100;
-                player.body.velocity.y = -100;
+                player.body.velocity.x = speed;
+                player.body.velocity.y = -speed;
                 if ( foot == 0 ){
                     player.frame = 6; 
                 }
@@ -194,8 +195,8 @@ $(function() {
             else if (cursors.down.isDown)
             {
                 //  Move to the right+down
-                player.body.velocity.x = 100;
-                player.body.velocity.y = 100;
+                player.body.velocity.x = speed;
+                player.body.velocity.y = speed;
                 if ( foot == 0 ){
                     player.frame = 6; 
                 }
@@ -206,7 +207,7 @@ $(function() {
             else
             {
                 //  Move to the right
-                player.body.velocity.x = 180;
+                player.body.velocity.x = speed*1.8;
                 if ( foot == 0 ){
                     player.frame = 6; 
                 }
@@ -219,7 +220,7 @@ $(function() {
         else if (cursors.up.isDown)
         {
             //  Move to the up
-            player.body.velocity.y = -180; 
+            player.body.velocity.y = -speed; 
             if ( foot == 0 ){
                player.frame = 2; 
             }
@@ -230,7 +231,7 @@ $(function() {
         else if (cursors.down.isDown)
         {
             //  Move to the down
-            player.body.velocity.y = 180; 
+            player.body.velocity.y = speed; 
             if ( foot == 0 ){
                player.frame = 0; 
             }
