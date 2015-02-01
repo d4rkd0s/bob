@@ -144,7 +144,7 @@ $(function() {
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
             randY = Math.floor(Math.random()*(550-180+1)+180);
-            if ( randX => horse.x+100 && randX =< horse.x-100 ){
+            if ( randX < horse.x+100 && randX > horse.x-100 ){
                 console.log("in");
             }
             else{
