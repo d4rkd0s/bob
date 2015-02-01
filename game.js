@@ -147,7 +147,8 @@ $(function() {
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
             randY = Math.floor(Math.random()*(550-180+1)+180);
-            if ( game.physics.arcade.intersets(apple, horse) == true ){
+            if ( game.physics.arcade.distanceBetween(apple, horse) <= 100 ){
+                console.log("Apple spawned on horse, respawning apple...");
                 apple.kill();
             }
             else{
