@@ -115,15 +115,8 @@ $(function() {
         player.body.velocity.y = 0;
 
         
-        if ( horseHealth >= 3 ){
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50, 50, 50);
-        }
-        if ( horseHealth == 2 ){
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 100, 100, 100);
-        }
-        if ( horseHealth == 1 ){
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 200, 200, 200);
-        }
+        //move mr.horse
+        horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*10), 50+(score*10), 50+(score*10));
         
 
         if ( apple.alive == true){
