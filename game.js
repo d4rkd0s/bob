@@ -115,7 +115,7 @@ $(function() {
         randY = Math.floor(Math.random()*(300-50+1)+50);
 
         if ( apple.alive == true){
-            if ( distanceBetween(apple, player) <= 10 ){
+            if ( Physics.distanceBetween(apple, player) <= 10 ){
                 score = score + 1;
                 apple.kill();
                 console.log(score);
