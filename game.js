@@ -127,8 +127,8 @@ $(function() {
             }
         }
         else{
-            randY = Math.floor(Math.random()*(800-50+1)+50);
-            randX = Math.floor(Math.random()*(300-50+1)+50);
+            randX = Math.floor(Math.random()*(800-50+1)+50);
+            randY = Math.floor(Math.random()*(220-50+1)+50);
             apple = game.add.sprite(randX, randY, 'apple');
             game.physics.arcade.enable(apple);
             game.physics.arcade.enableBody(apple);
