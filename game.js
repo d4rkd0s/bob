@@ -88,7 +88,7 @@ $(function() {
         game.physics.arcade.enable(horse);
         game.physics.arcade.enableBody(horse);
         horse.body.collideWorldBounds = true;
-        game.time.slowMotion = 2.0;
+        
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
     }//create()
     
@@ -96,6 +96,7 @@ $(function() {
         
         //ocean collision
         game.physics.arcade.collide(player, ocean);
+        game.physics.arcade.collide(player, horse);
 
         //horse.body.accelerateToObject(horse, player, 600, 250, 250);
 
