@@ -147,12 +147,14 @@ $(function() {
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
             randY = Math.floor(Math.random()*(550-180+1)+180);
-            if ( game.physics.arcade.distanceBetween(apple, horse) <= 100 ){
-                console.log("Apple spawned on horse, respawning apple...");
+            if ( game.physics.arcade.overlap(apple, horse) == true ){
+                console.log("Apple spawned on horse, regenerating randX and randY");
+                randX = Math.floor(Math.random()*(800-50+1)+50);
+                randY = Math.floor(Math.random()*(550-180+1)+180);
                 apple.kill();
             }
             else{
-                console.log("out");
+                console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
@@ -161,7 +163,7 @@ $(function() {
                 game.physics.arcade.collide(ocean, apple);
             }
             
-        }
+        }//dead apple
 
         if (cursors.left.isDown)
         {
