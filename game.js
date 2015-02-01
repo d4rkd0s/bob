@@ -24,7 +24,7 @@ $(function() {
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        //game.load.audio('jumpsound', 'assets/sounds/jump.wav');
+        game.load.audio('applesound', 'assets/sounds/apple.wav');
         
         //walking case switch
         function coroutine(f) {
@@ -67,8 +67,8 @@ $(function() {
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
         //game.add.text(game.world.centerX-300, 0, text, style);
         //sound
-        //jumpsound = game.add.audio('jumpsound');
-        //jumpsound.allowMultiple = false;
+        applesound = game.add.audio('applesound');
+        applesound.allowMultiple = false;
 
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
@@ -118,18 +118,20 @@ $(function() {
         if ( apple.alive == true){
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
+                applesound.play();
                 apple.kill();
                 console.log(score);
             }
             if ( game.physics.arcade.collide(apple, horse) == true ){
                 score = score - 1;
+                //losesound.play();
                 apple.kill();
                 console.log(score);
             }
         }
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
-            randY = Math.floor(Math.random()*(550-170+1)+170);
+            randY = Math.floor(Math.random()*(550-180+1)+180);
             apple = game.add.sprite(randX, randY, 'apple');
             game.physics.arcade.enable(apple);
             game.physics.arcade.enableBody(apple);
