@@ -144,12 +144,19 @@ $(function() {
         else{
             randX = Math.floor(Math.random()*(800-50+1)+50);
             randY = Math.floor(Math.random()*(550-180+1)+180);
-            apple = game.add.sprite(randX, randY, 'apple');
-            game.physics.arcade.enable(apple);
-            game.physics.arcade.enableBody(apple);
-            apple.body.collideWorldBounds = true;
-            game.physics.arcade.collide(player, apple);
-            game.physics.arcade.collide(ocean, apple);
+            if ( randX => horse.x+100 && randX =< horse.x-100 ){
+                console.log("in");
+            }
+            else{
+                console.log("out");
+                apple = game.add.sprite(randX, randY, 'apple');
+                game.physics.arcade.enable(apple);
+                game.physics.arcade.enableBody(apple);
+                apple.body.collideWorldBounds = true;
+                game.physics.arcade.collide(player, apple);
+                game.physics.arcade.collide(ocean, apple);
+            }
+            
         }
 
         if (cursors.left.isDown)
