@@ -119,11 +119,13 @@ $(function() {
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
                 applesound.play();
+                $( "#score" ).text(score + " apples");
                 apple.kill();
                 console.log(score);
             }
             if ( game.physics.arcade.collide(apple, horse) == true ){
                 score = score - 1;
+                $( "#score" ).text(score + " apples");
                 //losesound.play();
                 apple.kill();
                 console.log(score);
