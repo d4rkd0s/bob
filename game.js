@@ -115,7 +115,7 @@ $(function() {
     
 
         if ( apple.alive == true){
-            if ( game.physics.arcade.intersets(apple, player) == true ){
+            if ( game.physics.arcade.intersects(apple, player) == true ){
                 score = score + 1;
                 apple.kill();
                 console.log(score);
