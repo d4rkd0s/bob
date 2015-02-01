@@ -104,8 +104,13 @@ $(function() {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
 
-        if ( Phaser.Keyboard.SPACEBAR == true ){
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, player, 100, 50, 50);
+        horse.velocity = game.physics.arcade.accelerateToObject(horse, player, 50, 50, 50);
+
+        if ( apple.alive() == true){
+            console.log("Apple is alive");
+        }
+        else{
+            console.log("Apple is not alive");
         }
 
         if (cursors.left.isDown)
