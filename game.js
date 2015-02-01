@@ -61,7 +61,7 @@ $(function() {
         //jumpsound = game.add.audio('jumpsound');
         //jumpsound.allowMultiple = false;
 
-        ocean = game.add.sprite(0, game.world.height - 320, 'ocean');
+        ocean = game.add.sprite(0, game.world.height - 520, 'ocean');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         
         //add horse
