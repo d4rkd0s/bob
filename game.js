@@ -56,7 +56,7 @@ $(function() {
         player = game.add.sprite(775, game.world.height - 150, 'bob');
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
 
-        var healthbar = this.game.add.sprite(0,0,'healthbar');
+        var healthbar = game.add.sprite(0,0,'healthbar');
         healthbar.cropEnabled = true;
         healthbar.crop.width = (character.health / character.maxHealth) * healthbar.width
 
@@ -92,6 +92,7 @@ $(function() {
     }//create()
     
     function update() {
+        
         //ocean collision
         game.physics.arcade.collide(player, ocean);
 
