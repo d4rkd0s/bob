@@ -129,6 +129,8 @@ $(function() {
                 //losesound.play();
                 apple.kill();
                 if ( horseHealth == 0 ){
+                    $( "#score" ).text("Final Score: " + score);
+                    $( "#horseHealth" ).text("Your horse has died!");
                     game.physics.destroy();
                 }
                 console.log("horseHealth: " + horseHealth);
