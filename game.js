@@ -141,7 +141,7 @@ $(function() {
     function update() {
         apple.bringToTop();
         //ocean collision
-        game.physics.arcade.collide(player, ocean);
+        //game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
         game.physics.arcade.collide(ocean, apple);
         game.physics.arcade.collide(horse, ocean);
@@ -197,21 +197,14 @@ $(function() {
             if ( apple_count > 0 ){
                 randX = Math.floor(Math.random()*(650-600+1)+600);
                 randY = Math.floor(Math.random()*(190-90+1)+90);
-                if ( game.physics.arcade.overlap(apple, horse) == true ){
-                    console.log("Apple spawned on horse, regenerating randX and randY");
-                    randX = Math.floor(Math.random()*(650-600+1)+600);
-                    randY = Math.floor(Math.random()*(190-90+1)+90);
-                    apple.kill();
-                }
-                else{
-                    console.log("Apple is clear of horse, spawned apple.");
-                    apple = game.add.sprite(randX, randY, 'apple');
-                    game.physics.arcade.enable(apple);
-                    game.physics.arcade.enableBody(apple);
-                    apple.body.collideWorldBounds = true;
-                    game.physics.arcade.collide(player, apple);
-                    game.physics.arcade.collide(ocean, apple);
-                }
+                
+                console.log("Apple is clear of horse, spawned apple.");
+                apple = game.add.sprite(randX, randY, 'apple');
+                game.physics.arcade.enable(apple);
+                game.physics.arcade.enableBody(apple);
+                apple.body.collideWorldBounds = true;
+                game.physics.arcade.collide(player, apple);
+                game.physics.arcade.collide(ocean, apple);
             }//apple_count isnt 0
             else {
                 console.log("apple count is now zero!");
