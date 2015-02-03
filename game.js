@@ -16,6 +16,7 @@ $(function() {
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('apple', 'assets/images/apple_red.png');
         game.load.image('tree', 'assets/images/tree.png');
+        game.load.image('sun', 'assets/images/sun.png');
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.image('healthbar', 'assets/images/healthbar.png');
@@ -83,6 +84,9 @@ $(function() {
         
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
+
+        //add horse
+        sun = game.add.sprite(50, game.world.height - 50, 'sun');
 
         //add player
         player = game.add.sprite(775, game.world.height - 150, 'bob');
