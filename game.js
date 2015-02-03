@@ -75,7 +75,7 @@ $(function() {
         bobsound.allowMultiple = true;
 
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
-        tree = game.add.sprite(350, 30, 'tree');
+        tree = game.add.sprite(450, 30, 'tree');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         
         //add horse
