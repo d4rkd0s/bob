@@ -115,6 +115,8 @@ $(function() {
 
     game.input.onDown.add(gofull, this);
 
+    //prime that apple
+    apple.kill();
     }//create
     
     function onEnterFullScreen() {
