@@ -6,8 +6,8 @@ $(function() {
         //setting up starting vars
         score = 0;
         console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
-        horseHealth = 3;
-        console.log("%c   horseHealth: 3   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
+        horseHealth = 10;
+        console.log("%c   horseHealth: 10   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
 
         speed = 250;
         //game.load.image('bob', 'assets/images/bob.png');
