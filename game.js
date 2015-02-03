@@ -55,8 +55,7 @@ $(function() {
         game.add.sprite(0, 0, 'background');
         console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //Game Objects
-        player = game.add.sprite(775, game.world.height - 150, 'bob');
-        console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+        
         apple = game.add.sprite(100, 200, 'apple');
 
         //var healthbar = game.add.sprite(0,0,'healthbar');
@@ -78,7 +77,10 @@ $(function() {
         
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
-        
+
+        //add player
+        player = game.add.sprite(775, game.world.height - 150, 'bob');
+        console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
         console.log("%c   physics: enabled(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
