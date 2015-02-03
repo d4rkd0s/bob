@@ -60,6 +60,9 @@ $(function() {
         
         apple = game.add.sprite(100, 200, 'apple');
 
+        // Stretch to fill
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
         //var healthbar = game.add.sprite(0,0,'healthbar');
         //healthbar.cropEnabled = true;
         //healthbar.crop.width = (character.health / character.maxHealth) * healthbar.width
@@ -106,7 +109,32 @@ $(function() {
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
-    }//create()
+
+    game.scale.enterFullScreen.add(onEnterFullScreen, this);
+    game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
+
+    game.input.onDown.add(gofull, this);
+
+    }//create
+    
+    function onEnterFullScreen() {
+    
+        button.visible = true;
+    
+    }
+    
+    function onLeaveFullScreen() {
+    
+        button.visible = false;
+        
+    }
+    
+    function gofull() {
+    
+        game.scale.startFullScreen();
+    
+    }
+
     
     function update() {
         
