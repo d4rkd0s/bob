@@ -99,6 +99,8 @@ $(function() {
         horse.body.collideWorldBounds = true;
         apple.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
+        horse.anchor.x = 0.5;
+        horse.anchor.y = 0.5;
     }//create()
     
     function update() {
