@@ -156,10 +156,10 @@ $(function() {
         horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
         
         if ( player.y < 250 ) {
-            tree.z = 7;
+            tree.bringToTop();
         }
         else{
-            tree.z = 4;
+            player.bringToTop();
         }
 
 
