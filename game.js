@@ -4,6 +4,7 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     function preload() {
         //setting up starting vars
+        apple_count = 1;
         score = 0;
         console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         horseHealth = 10;
@@ -14,6 +15,7 @@ $(function() {
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('apple', 'assets/images/apple_red.png');
+        game.load.image('tree', 'assets/images/tree.png');
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.image('healthbar', 'assets/images/healthbar.png');
@@ -73,6 +75,7 @@ $(function() {
         bobsound.allowMultiple = true;
 
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
+        tree = game.add.sprite(325, 100, 'tree');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         
         //add horse
@@ -152,24 +155,29 @@ $(function() {
             }
         }//apple alive
         else{
-            randX = Math.floor(Math.random()*(800-50+1)+50);
-            randY = Math.floor(Math.random()*(550-180+1)+180);
-            if ( game.physics.arcade.overlap(apple, horse) == true ){
-                console.log("Apple spawned on horse, regenerating randX and randY");
+            if ( apple_count > 0 ){
                 randX = Math.floor(Math.random()*(800-50+1)+50);
                 randY = Math.floor(Math.random()*(550-180+1)+180);
-                apple.kill();
-            }
-            else{
-                console.log("Apple is clear of horse, spawned apple.");
-                apple = game.add.sprite(randX, randY, 'apple');
-                game.physics.arcade.enable(apple);
-                game.physics.arcade.enableBody(apple);
-                apple.body.collideWorldBounds = true;
-                game.physics.arcade.collide(player, apple);
-                game.physics.arcade.collide(ocean, apple);
-            }
-            
+                if ( game.physics.arcade.overlap(apple, horse) == true ){
+                    console.log("Apple spawned on horse, regenerating randX and randY");
+                    randX = Math.floor(Math.random()*(800-50+1)+50);
+                    randY = Math.floor(Math.random()*(550-180+1)+180);
+                    apple.kill();
+                }
+                else{
+                    console.log("Apple is clear of horse, spawned apple.");
+                    apple = game.add.sprite(randX, randY, 'apple');
+                    game.physics.arcade.enable(apple);
+                    game.physics.arcade.enableBody(apple);
+                    apple.body.collideWorldBounds = true;
+                    game.physics.arcade.collide(player, apple);
+                    game.physics.arcade.collide(ocean, apple);
+                }
+            }//apple_count isnt 0
+            else {
+                console.log("apple count is now zero!");
+                game.physics.destroy();
+            }//apple count is 0
         }//dead apple
 
         if (cursors.left.isDown)
