@@ -141,7 +141,7 @@ $(function() {
     function update() {
         apple.bringToTop();
         //ocean collision
-        //game.physics.arcade.collide(player, ocean);
+        game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
         game.physics.arcade.collide(ocean, apple);
         game.physics.arcade.collide(horse, ocean);
