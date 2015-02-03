@@ -139,7 +139,7 @@ $(function() {
 
     
     function update() {
-        
+        apple.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
@@ -159,6 +159,7 @@ $(function() {
         
         if ( player.y < 250 ) {
             tree.bringToTop();
+            apple.bringToTop();
         }
         else{
             player.bringToTop();
