@@ -1,6 +1,6 @@
 $(function() {
     window.onload = function() {
-    console.log("%c  ~~~  Bob v0.2 - Developed by d4rkd0s  ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
+    console.log("%c  ~~~  Bob v0.5 - Developed by d4rkd0s & d3mn5pwn ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     function preload() {
         //setting up starting vars
