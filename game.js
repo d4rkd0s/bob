@@ -86,7 +86,7 @@ $(function() {
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
 
         //add horse
-        sun = game.add.sprite(50, (game.world.height/2)+200, 'sun');
+        sun = game.add.sprite(100, 100, 'sun');
 
         //add player
         player = game.add.sprite(775, game.world.height - 150, 'bob');
