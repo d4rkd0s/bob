@@ -177,6 +177,7 @@ $(function() {
                 if ( horseHealth == 0 ){
                     $( "#score" ).text("Final Score: " + score);
                     $( "#horseHealth" ).text("Your horse has died!");
+                    game.debug.text('Retry? (Refresh the page)', game.width/2, game.height/2);
                     game.physics.destroy();
                 }
                 console.log("horseHealth: " + horseHealth);
@@ -204,6 +205,7 @@ $(function() {
             }//apple_count isnt 0
             else {
                 console.log("apple count is now zero!");
+                game.debug.text('Retry? (Refresh the page)', game.width/2, game.height/2);
                 game.physics.destroy();
             }//apple count is 0
         }//dead apple
@@ -320,11 +322,11 @@ function render () {
 
     if (game.scale.isFullScreen)
     {
-        game.debug.text('ESC to leave fullscreen', 270, 16);
+        game.debug.text('ESC to leave fullscreen', game.width/2, 16);
     }
     else
     {
-        game.debug.text('Click / Tap to go fullscreen', 270, 16);
+        game.debug.text('Click / Tap to go fullscreen', game.width/2, 16);
     }
 
 }
