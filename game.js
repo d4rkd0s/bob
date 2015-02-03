@@ -192,12 +192,12 @@ $(function() {
         }//apple alive
         else{
             if ( apple_count > 0 ){
-                randX = Math.floor(Math.random()*(800-50+1)+50);
-                randY = Math.floor(Math.random()*(550-180+1)+180);
+                randX = Math.floor(Math.random()*(650-600+1)+600);
+                randY = Math.floor(Math.random()*(190-90+1)+90);
                 if ( game.physics.arcade.overlap(apple, horse) == true ){
                     console.log("Apple spawned on horse, regenerating randX and randY");
-                    randX = Math.floor(Math.random()*(800-50+1)+50);
-                    randY = Math.floor(Math.random()*(550-180+1)+180);
+                    randX = Math.floor(Math.random()*(650-600+1)+600);
+                    randY = Math.floor(Math.random()*(190-90+1)+90);
                     apple.kill();
                 }
                 else{
