@@ -11,6 +11,7 @@ $(function() {
         console.log("%c   horseHealth: 10   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         appleOnTree = 0;
         speed = 250;
+        appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
