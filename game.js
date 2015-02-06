@@ -143,7 +143,7 @@ $(function() {
 
     
     function update() {
-        var curTime = game.time.totalElapsedSeconds();
+        console.log(game.time.totalElapsedSeconds());
         apple.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
