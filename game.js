@@ -9,7 +9,7 @@ $(function() {
         console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         horseHealth = 10;
         console.log("%c   horseHealth: 10   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
-
+        appleOnTree = 0;
         speed = 250;
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
@@ -60,7 +60,7 @@ $(function() {
         //Game Objects
         
         apple = game.add.sprite(100, 200, 'apple');
-        appleOnTree = 0;
+        
         // Stretch to fill
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
