@@ -172,7 +172,7 @@ $(function() {
 
 
         if ( apple.alive == true){
-            if ( appleSpawnTime+3 < curTime  && appleOnTree == 0 ){
+            if ( appleSpawnTime+3 < curTime && appleOnTree == 0 ){
                 appleOnTree = 1;
                 console.log("Apple ready to fling!");
             }
