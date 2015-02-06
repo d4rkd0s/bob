@@ -6,9 +6,7 @@ $(function() {
         //setting up starting vars
         apple_count = 1;
         score = 0;
-        console.log("%c   score: 0   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         horseHealth = 10;
-        console.log("%c   horseHealth: 10   ", "color: #FFFFFF; font-size: 12px; background: #FD8223;");
         appleOnTree = 0;
         speed = 250;
         appleSpawnTime = game.time.totalElapsedSeconds();
@@ -61,7 +59,7 @@ $(function() {
         //Game Objects
         
         apple = game.add.sprite(100, 200, 'apple');
-        
+        var appleSpawnTime = game.time.totalElapsedSeconds();
         // Stretch to fill
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
