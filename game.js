@@ -144,7 +144,6 @@ $(function() {
     
     function update() {
         console.log(game.time.totalElapsedSeconds());
-        var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
@@ -177,14 +176,14 @@ $(function() {
                 appleOnTree = 1;
                 console.log("Apple ready to fling!");
             }
-            if ( game.physics.arcade.overlap(apple, player) == true ){
+            if ( game.physics.arcade.overlap(apple, player) == true && appleOnTree == 1 ){
                 score = score + 1;
                 bobsound.play();
                 $( "#score" ).text("Score: " + score);
                 apple.kill();
                 console.log("Score: " + score);
             }
-            if ( game.physics.arcade.collide(apple, horse) == true ){
+            if ( game.physics.arcade.collide(apple, horse) == true && appleOnTree == 1 ){
                 horseHealth = horseHealth - 1;
                 if ( horseHealth == 1 ){
                     $( "#horseHealth" ).text(horseHealth + " apple until your horse dies!");
