@@ -143,7 +143,7 @@ $(function() {
 
     
     function update() {
-        console.log(game.time.totalElapsedSeconds())
+        var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
@@ -172,6 +172,7 @@ $(function() {
 
 
         if ( apple.alive == true){
+            
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
                 bobsound.play();
