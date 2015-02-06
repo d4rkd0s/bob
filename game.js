@@ -172,7 +172,9 @@ $(function() {
 
 
         if ( apple.alive == true){
-            
+            if ( appleSpawnTime > curTme+3  && appleOnTree == 0 ){
+                appleOnTree = 1;
+            }
             if ( game.physics.arcade.overlap(apple, player) == true ){
                 score = score + 1;
                 bobsound.play();
@@ -206,6 +208,8 @@ $(function() {
                 
                 console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
+                var appleOnTree = 1;
+                var appleSpawnTime = game.time.totalElapsedSeconds();
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
                 apple.body.collideWorldBounds = true;
