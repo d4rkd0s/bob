@@ -172,7 +172,8 @@ $(function() {
 
 
         if ( apple.alive == true){
-            console.log(appleSpawnTime+3);
+            console.log(apple_count);
+            console.log(appleSpawnTime);
             console.log(appleOnTree);
             if ( appleSpawnTime+3 < curTime && appleOnTree == 0 ){
                 appleOnTree = 1;
