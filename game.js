@@ -172,7 +172,7 @@ $(function() {
 
 
         if ( apple.alive == true){
-            if ( appleSpawnTime > curTme+3  && appleOnTree == 0 ){
+            if ( appleSpawnTime > curTime+3  && appleOnTree == 0 ){
                 appleOnTree = 1;
             }
             if ( game.physics.arcade.overlap(apple, player) == true ){
