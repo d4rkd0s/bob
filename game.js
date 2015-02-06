@@ -45,8 +45,17 @@ $(function() {
             }
         });
 
+        var appleTick = coroutine(function*(_) {
+            while (true) {
+                yield _;
+                spawnApple();
+            }
+        });
+
         //walk step speed in ms
         setInterval(clock, 100);
+        //spawn apple in ms
+        setInterval(appleTick, 3000);
         //notify user (console)
         console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     }//preload
