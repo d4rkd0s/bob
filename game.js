@@ -60,7 +60,7 @@ $(function() {
         //Game Objects
         
         apple = game.add.sprite(100, 200, 'apple');
-
+        appleOnTree = 0;
         // Stretch to fill
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
