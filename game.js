@@ -125,13 +125,13 @@ $(function() {
     
     function onEnterFullScreen() {
     
-        button.visible = true;
+        //do anything you want
     
     }
     
     function onLeaveFullScreen() {
     
-        button.visible = false;
+        //do anything you want
         
     }
     
