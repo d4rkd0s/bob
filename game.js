@@ -211,6 +211,7 @@ $(function() {
                 apple = game.add.sprite(randX, randY, 'apple');
                 var appleOnTree = 1;
                 var appleSpawnTime = game.time.totalElapsedSeconds();
+                console.log(appleSpawnTime);
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
                 apple.body.collideWorldBounds = true;
