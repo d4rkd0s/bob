@@ -4,7 +4,7 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     function preload() {
         //setting up starting vars
-        apple_count = 1;
+        apple_count = 10;
         score = 0;
         horseHealth = 10;
         appleOnTree = 0;
