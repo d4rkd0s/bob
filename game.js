@@ -22,7 +22,7 @@ $(function() {
         //console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
         console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        game.load.image('horse', 'assets/images/horse.png', 154, 113);
+        game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
