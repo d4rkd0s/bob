@@ -168,7 +168,11 @@ $(function() {
         speed = 200+(10*score);
         
         //move mr.horse
-        horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
+        if ( appleOnTree != 1 )
+        {
+            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
+        }
+        
         
         if ( player.y < 250 ) {
             tree.bringToTop();
