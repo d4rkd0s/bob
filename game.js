@@ -172,10 +172,10 @@ $(function() {
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
             if ( foot == 0 ){
-                player.frame = 1;
+                horse.frame = 1;
             }
             if ( foot == 1 ){
-                player.frame = 2;
+                horse.frame = 2;
             }
         }
         
