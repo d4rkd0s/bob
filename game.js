@@ -220,6 +220,7 @@ $(function() {
                 
                 console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
+                apple_count = apple_count - 1;
                 var appleOnTree = 1;
                 var appleSpawnTime = game.time.totalElapsedSeconds();
                 console.log(appleSpawnTime);
