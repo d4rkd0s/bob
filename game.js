@@ -161,7 +161,9 @@ $(function() {
             //set the apple to be off the tree
             game.appleOnTree = 0;
             //simply move it down (for now)
-            apple.body.velocity.y = 50;
+            apple.allowGravity = true;
+            apple.gravity = 100;
+            apple.body.velocity.y = -50;
         }
     }
     
