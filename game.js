@@ -7,7 +7,7 @@ $(function() {
         apple_count = 10;
         score = 0;
         horseHealth = 10;
-        game.appleOnTree = 0;
+        game.appleOnTree = 1;
         speed = 250;
         appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
@@ -169,7 +169,7 @@ $(function() {
         speed = 200+(10*score);
         
         //move mr.horse
-        if ( appleOnTree == 1 )
+        if ( game.appleOnTree != 1 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
             if ( foot == 0 ){
@@ -196,19 +196,19 @@ $(function() {
         if ( apple.alive == true){
             console.log("Apple count" + apple_count);
             console.log("Apple spawn time" + appleSpawnTime);
-            console.log("Apple on tree" + appleOnTree);
-            if ( appleSpawnTime+3 < curTime && appleOnTree == 0 ){
-                appleOnTree = 1;
+            console.log("Apple on tree" + game.appleOnTree);
+            if ( appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
+                game.appleOnTree = 0;
                 console.log("Apple ready to fling!");
             }
-            if ( game.physics.arcade.overlap(apple, player) == true && appleOnTree == 1 ){
+            if ( game.physics.arcade.overlap(apple, player) == true && game.appleOnTree == 0 ){
                 score = score + 1;
                 bobsound.play();
                 $( "#score" ).text("Score: " + score);
                 apple.kill();
                 console.log("Score: " + score);
             }
-            if ( game.physics.arcade.collide(apple, horse) == true && appleOnTree == 1 ){
+            if ( game.physics.arcade.collide(apple, horse) == true && game.appleOnTree == 0 ){
                 horseHealth = horseHealth - 1;
                 if ( horseHealth == 1 ){
                     $( "#horseHealth" ).text(horseHealth + " apple until your horse dies!");
@@ -235,8 +235,8 @@ $(function() {
                 console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 apple_count = apple_count - 1;
-                var appleOnTree = 0;
-                var appleSpawnTime = game.time.totalElapsedSeconds();
+                var game.appleOnTree = 0;
+                appleSpawnTime = game.time.totalElapsedSeconds();
                 console.log(appleSpawnTime);
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
