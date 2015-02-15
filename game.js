@@ -169,7 +169,7 @@ $(function() {
         speed = 200+(10*score);
         
         //move mr.horse
-        if ( appleOnTree = 1 )
+        if ( appleOnTree == 1 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
             if ( foot == 0 ){
@@ -198,7 +198,7 @@ $(function() {
             console.log("Apple spawn time" + appleSpawnTime);
             console.log("Apple on tree" + appleOnTree);
             if ( appleSpawnTime+3 < curTime && appleOnTree == 0 ){
-                appleOnTree = 0;
+                appleOnTree = 1;
                 console.log("Apple ready to fling!");
             }
             if ( game.physics.arcade.overlap(apple, player) == true && appleOnTree == 1 ){
@@ -235,7 +235,7 @@ $(function() {
                 console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 apple_count = apple_count - 1;
-                var appleOnTree = 1;
+                var appleOnTree = 0;
                 var appleSpawnTime = game.time.totalElapsedSeconds();
                 console.log(appleSpawnTime);
                 game.physics.arcade.enable(apple);
