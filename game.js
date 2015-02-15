@@ -7,7 +7,7 @@ $(function() {
         apple_count = 10;
         score = 0;
         horseHealth = 10;
-        Basicgame.appleOnTree = 0;
+        game.appleOnTree = 0;
         speed = 250;
         appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
