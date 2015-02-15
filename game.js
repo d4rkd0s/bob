@@ -9,7 +9,7 @@ $(function() {
         horseHealth = 10;
         game.appleOnTree = 1;
         speed = 250;
-        appleSpawnTime = game.time.totalElapsedSeconds();
+        game.appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -195,9 +195,9 @@ $(function() {
 
         if ( apple.alive == true){
             console.log("Apple count" + apple_count);
-            console.log("Apple spawn time" + appleSpawnTime);
+            console.log("Apple spawn time" + game.appleSpawnTime);
             console.log("Apple on tree" + game.appleOnTree);
-            if ( appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
+            if ( game.appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
                 game.appleOnTree = 0;
                 console.log("Apple ready to fling!");
             }
@@ -235,9 +235,9 @@ $(function() {
                 console.log("Apple is clear of horse, spawned apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 apple_count = apple_count - 1;
-                var game.appleOnTree = 0;
-                appleSpawnTime = game.time.totalElapsedSeconds();
-                console.log(appleSpawnTime);
+                game.appleOnTree = 0;
+                game.appleSpawnTime = game.time.totalElapsedSeconds();
+                console.log(game.appleSpawnTime);
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
                 apple.body.collideWorldBounds = true;
