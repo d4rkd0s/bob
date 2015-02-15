@@ -40,8 +40,15 @@ $(function() {
             while (true) {
                 yield _;
                 foot = 0;
+                if (hoof == 0){
+                    hoof = 2;
+                }
+                else{
+                    hoof = 0;
+                }
                 yield _;
                 foot = 1;
+                hoof = 1;
             }
         });
 
@@ -179,13 +186,13 @@ $(function() {
         if ( game.appleOnTree != 1 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
-            if ( foot == 0 ){
+            if ( hoof == 0 ){
                 horse.frame = 1;
             }
-            if ( foot == 1 ){
+            if ( hoof == 1 ){
                 horse.frame = 2;
             }
-            if ( foot == 2 ){
+            if ( hoof == 2 ){
                 horse.frame = 3;
             }
         }
