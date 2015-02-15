@@ -194,9 +194,7 @@ $(function() {
 
 
         if ( apple.alive == true){
-            console.log("Apple count" + apple_count);
-            console.log("Apple spawn time" + game.appleSpawnTime);
-            console.log("Apple on tree" + game.appleOnTree);
+
             if ( game.appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
                 game.appleOnTree = 0;
                 console.log("Apple ready to fling!");
