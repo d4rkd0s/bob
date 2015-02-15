@@ -170,7 +170,7 @@ $(function() {
         //move mr.horse
         if ( appleOnTree = 1 )
         {
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
+            //horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
             if ( foot == 0 ){
                 horse.frame = 1;
             }
