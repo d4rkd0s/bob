@@ -93,7 +93,7 @@ $(function() {
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
 
-        //add horse
+        //add sun
         sun = game.add.sprite(80, 20, 'sun');
 
         //add player
@@ -168,7 +168,7 @@ $(function() {
         speed = 200+(10*score);
         
         //move mr.horse
-        if ( appleOnTree != 1 )
+        if ( appleOnTree != 0 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
             if ( foot == 0 ){
@@ -176,6 +176,9 @@ $(function() {
             }
             if ( foot == 1 ){
                 horse.frame = 2;
+            }
+            if ( foot == 2 ){
+                horse.frame = 3;
             }
         }
         
