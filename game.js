@@ -167,8 +167,7 @@ $(function() {
             game.appleOnTree = 0;
             //simply move it down (for now)
             apple.allowGravity = true;
-            apple.gravity = 100;
-            apple.body.velocity.y = -50;
+            apple.body.velocity.y = 50;
         }
     }
     
