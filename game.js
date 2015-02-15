@@ -151,6 +151,7 @@ $(function() {
 
     
     function update() {
+        console.log("appleOnTree" + appleOnTree);
         var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
         //ocean collision
