@@ -2,13 +2,12 @@ $(function() {
     window.onload = function() {
     console.log("%c  ~~~  Bob v0.5 - Developed by d4rkd0s & d3mn5pwn ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
-    var appleOnTree = 2;
     function preload() {
         //setting up starting vars
         apple_count = 10;
         score = 0;
         horseHealth = 10;
-        
+        Basicgame.appleOnTree = 0;
         speed = 250;
         appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
