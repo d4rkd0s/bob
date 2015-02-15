@@ -161,6 +161,12 @@ $(function() {
     
     }
 
+    function gameEnd() { 
+        console.log("apple count is now zero!");
+        game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
+        game.physics.destroy();
+    }
+
     function flingApple() {
         if ( game.appleOnTree == '1' ) {
             //set the apple to be off the tree
@@ -263,9 +269,7 @@ $(function() {
                 game.physics.arcade.collide(ocean, apple);
             }//apple_count isnt 0
             else {
-                console.log("apple count is now zero!");
-                game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
-                game.physics.destroy();
+                gameEnd();
             }//apple count is 0
         }//dead apple
 
