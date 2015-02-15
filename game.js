@@ -48,7 +48,7 @@ $(function() {
         var appleTick = coroutine(function*(_) {
             while (true) {
                 yield _;
-                spawnApple();
+                flingApple();
             }
         });
 
@@ -149,6 +149,14 @@ $(function() {
     
     }
 
+    function flingApple() {
+        if ( game.appleOnTree == '1' ) {
+            //set the apple to be off the tree
+            game.appleOnTree = 0;
+            //simply move it down (for now)
+            apple.body.velocity.y = 50;
+        }
+    }
     
     function update() {
         
@@ -230,7 +238,7 @@ $(function() {
                 randX = Math.floor(Math.random()*(650-600+1)+600);
                 randY = Math.floor(Math.random()*(190-90+1)+90);
                 
-                console.log("Apple is clear of horse, spawned apple.");
+                console.log("Apple is clear of horse, spawning apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 apple_count = apple_count - 1;
                 game.appleOnTree = 1;
