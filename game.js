@@ -161,7 +161,7 @@ $(function() {
     
     }
 
-    function gameEnd() { 
+    function levelEnd(scoreEnd, horseHealthEnd) { 
         console.log("apple count is now zero!");
         game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
         game.physics.destroy();
@@ -269,7 +269,7 @@ $(function() {
                 game.physics.arcade.collide(ocean, apple);
             }//apple_count isnt 0
             else {
-                gameEnd();
+                levelEnd(game.score, game.horseHealth);
             }//apple count is 0
         }//dead apple
 
