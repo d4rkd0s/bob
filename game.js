@@ -6,6 +6,7 @@ $(function() {
         //setting up starting vars
         apple_count = 10;
         score = 0;
+        hoof = 0;
         horseHealth = 10;
         game.appleOnTree = 1;
         speed = 250;
@@ -40,15 +41,19 @@ $(function() {
             while (true) {
                 yield _;
                 foot = 0;
-                if (hoof == 0){
-                    hoof = 2;
-                }
-                else{
-                    hoof = 0;
-                }
                 yield _;
                 foot = 1;
+            }
+        });
+
+        var horseclock = coroutine(function*(_) {
+            while (true) {
+                yield _;
+                hoof = 0;
+                yield _;
                 hoof = 1;
+                yield _;
+                hoof = 2;
             }
         });
 
