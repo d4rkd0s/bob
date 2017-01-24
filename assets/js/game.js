@@ -27,8 +27,9 @@ $(function() {
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
-        game.load.audio('bobsound', 'assets/sounds/bob.wav')
-        //walking case switch
+        game.load.audio('bobsound', 'assets/sounds/bob.wav');
+        
+        // Walking case switch / coroutine
         function coroutine(f) {
             var o = f(); // instantiate the coroutine
             o.next(); // execute until the first yield
