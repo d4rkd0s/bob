@@ -1,5 +1,4 @@
 $(function() {
-    window.onload = function() {
     console.log("%c  ~~~  Bob v0.5 - Developed by d4rkd0s & d3mn5pwn ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     function preload() {
@@ -31,9 +30,9 @@ $(function() {
         game.load.audio('bobsound', 'assets/sounds/bob.wav')
         //walking case switch
         function coroutine(f) {
-           var o = f(); // instantiate the coroutine
-           o.next(); // execute until the first yield
-           return function(x) {
+            var o = f(); // instantiate the coroutine
+            o.next(); // execute until the first yield
+            return function(x) {
                 o.next(x);
             }
         }
@@ -71,14 +70,14 @@ $(function() {
         //notify user (console)
         console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     }//preload
-    
+
     function create() {
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
         console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //Game Objects
-        
+
         apple = game.add.sprite(100, 200, 'apple');
         var appleSpawnTime = game.time.totalElapsedSeconds();
         // Stretch to fill
@@ -101,7 +100,7 @@ $(function() {
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         tree = game.add.sprite(450, 30, 'tree');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
-        
+
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
 
@@ -134,34 +133,34 @@ $(function() {
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
 
-    game.scale.enterFullScreen.add(onEnterFullScreen, this);
-    game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
+        game.scale.enterFullScreen.add(onEnterFullScreen, this);
+        game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
 
-    game.input.onDown.add(gofull, this);
+        game.input.onDown.add(gofull, this);
 
-    //prime that apple
-    apple.kill();
+        //prime that apple
+        apple.kill();
     }//create
-    
+
     function onEnterFullScreen() {
-    
+
         //do anything you want
-    
-    }
-    
-    function onLeaveFullScreen() {
-    
-        //do anything you want
-        
-    }
-    
-    function gofull() {
-    
-        game.scale.startFullScreen();
-    
+
     }
 
-    function levelEnd(scoreEnd, horseHealthEnd) { 
+    function onLeaveFullScreen() {
+
+        //do anything you want
+
+    }
+
+    function gofull() {
+
+        game.scale.startFullScreen();
+
+    }
+
+    function levelEnd(scoreEnd, horseHealthEnd) {
         console.log("apple count is now zero!");
         game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
         game.physics.destroy();
@@ -176,9 +175,9 @@ $(function() {
             apple.body.velocity.y = 50;
         }
     }
-    
+
     function update() {
-        
+
         var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
         //ocean collision
@@ -193,7 +192,7 @@ $(function() {
 
         //bob faster as he scores
         speed = 200+(10*score);
-        
+
         //move mr.horse
         if ( game.appleOnTree != 1 )
         {
@@ -208,8 +207,8 @@ $(function() {
                 horse.frame = 3;
             }
         }
-        
-        
+
+
         if ( player.y < 250 ) {
             tree.bringToTop();
             apple.bringToTop();
@@ -255,7 +254,7 @@ $(function() {
             if ( apple_count > 0 ){
                 randX = Math.floor(Math.random()*(650-600+1)+600);
                 randY = Math.floor(Math.random()*(190-90+1)+90);
-                
+
                 console.log("Apple is clear of horse, spawning apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
                 apple_count = apple_count - 1;
@@ -281,10 +280,10 @@ $(function() {
                 player.body.velocity.x = -speed;
                 player.body.velocity.y = -speed;
                 if ( foot == 0 ){
-                    player.frame = 4; 
+                    player.frame = 4;
                 }
                 if ( foot == 1 ){
-                   player.frame = 5; 
+                    player.frame = 5;
                 }
             }
             else if (cursors.down.isDown)
@@ -293,10 +292,10 @@ $(function() {
                 player.body.velocity.x = -speed;
                 player.body.velocity.y = speed;
                 if ( foot == 0 ){
-                    player.frame = 4; 
+                    player.frame = 4;
                 }
                 if ( foot == 1 ){
-                   player.frame = 5; 
+                    player.frame = 5;
                 }
             }
             else
@@ -304,13 +303,13 @@ $(function() {
                 //  Move to the left
                 player.body.velocity.x = -speed*2;
                 if ( foot == 0 ){
-                    player.frame = 4; 
+                    player.frame = 4;
                 }
                 if ( foot == 1 ){
-                   player.frame = 5; 
+                    player.frame = 5;
                 }
             }
-            
+
         }
 
         else if (cursors.right.isDown)
@@ -321,10 +320,10 @@ $(function() {
                 player.body.velocity.x = speed;
                 player.body.velocity.y = -speed;
                 if ( foot == 0 ){
-                    player.frame = 6; 
+                    player.frame = 6;
                 }
                 if ( foot == 1 ){
-                   player.frame = 7; 
+                    player.frame = 7;
                 }
             }
             else if (cursors.down.isDown)
@@ -333,10 +332,10 @@ $(function() {
                 player.body.velocity.x = speed;
                 player.body.velocity.y = speed;
                 if ( foot == 0 ){
-                    player.frame = 6; 
+                    player.frame = 6;
                 }
                 if ( foot == 1 ){
-                   player.frame = 7; 
+                    player.frame = 7;
                 }
             }
             else
@@ -344,54 +343,54 @@ $(function() {
                 //  Move to the right
                 player.body.velocity.x = speed*2;
                 if ( foot == 0 ){
-                    player.frame = 6; 
+                    player.frame = 6;
                 }
                 if ( foot == 1 ){
-                   player.frame = 7; 
+                    player.frame = 7;
                 }
             }
-            
+
         }
         else if (cursors.up.isDown)
         {
             //  Move to the up
-            player.body.velocity.y = -speed; 
+            player.body.velocity.y = -speed;
             if ( foot == 0 ){
-               player.frame = 2; 
+                player.frame = 2;
             }
             if ( foot == 1 ){
-               player.frame = 3; 
+                player.frame = 3;
             }
         }
         else if (cursors.down.isDown)
         {
             //  Move to the down
-            player.body.velocity.y = speed; 
+            player.body.velocity.y = speed;
             if ( foot == 0 ){
-               player.frame = 0; 
+                player.frame = 0;
             }
             if ( foot == 1 ){
-               player.frame = 1; 
+                player.frame = 1;
             }
-           
+
         }
 
 
 
 
-        } //update
-    
-function render () {
+    } //update
 
-    if (game.scale.isFullScreen)
-    {
-        game.debug.text('ESC to leave fullscreen', (game.width/2)-140, 60);
-    }
-    else
-    {
-        game.debug.text('Click / Tap to go fullscreen', (game.width/2)-140, 16);
+    function render () {
+
+        if (game.scale.isFullScreen)
+        {
+            game.debug.text('ESC to leave fullscreen', (game.width/2)-140, 60);
+        }
+        else
+        {
+            game.debug.text('Click / Tap to go fullscreen', (game.width/2)-140, 16);
+        }
+
     }
 
-}
-};
 });
