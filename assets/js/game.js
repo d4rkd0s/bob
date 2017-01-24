@@ -3,7 +3,7 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     function preload() {
         //setting up starting vars
-        apple_count = 10;
+        max_apple_count = 100;
         score = 0;
         hoof = 0;
         horseHealth = 10;
@@ -209,18 +209,14 @@ $(function() {
             }
         }
 
-
         if ( player.y < 250 ) {
             tree.bringToTop();
             apple.bringToTop();
-        }
-        else{
+        } else{
             player.bringToTop();
         }
 
-
         if ( apple.alive == true){
-
             if ( game.appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
                 game.appleOnTree = 0;
                 console.log("Apple ready to fling!");
@@ -250,15 +246,15 @@ $(function() {
                 }
                 console.log("horseHealth: " + horseHealth);
             }
-        }//apple alive
-        else{
-            if ( apple_count > 0 ){
+        } else{
+            if ( max_apple_count > 0 ){
+                // apple count is 0
                 randX = Math.floor(Math.random()*(650-600+1)+600);
                 randY = Math.floor(Math.random()*(190-90+1)+90);
 
                 console.log("Apple is clear of horse, spawning apple.");
                 apple = game.add.sprite(randX, randY, 'apple');
-                apple_count = apple_count - 1;
+                max_apple_count = max_apple_count - 1;
                 game.appleOnTree = 1;
                 game.appleSpawnTime = game.time.totalElapsedSeconds();
                 console.log(game.appleSpawnTime);
@@ -267,11 +263,11 @@ $(function() {
                 apple.body.collideWorldBounds = true;
                 game.physics.arcade.collide(player, apple);
                 game.physics.arcade.collide(ocean, apple);
-            }//apple_count isnt 0
-            else {
+            } else {
+                //max_apple_count isnt 0
                 levelEnd(game.score, game.horseHealth);
-            }//apple count is 0
-        }//dead apple
+            }
+        }
 
         if (cursors.left.isDown)
         {
