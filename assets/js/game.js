@@ -28,7 +28,7 @@ $(function() {
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
         game.load.audio('bobsound', 'assets/sounds/bob.wav');
-        
+
         // Walking case switch / coroutine
         function coroutine(f) {
             var o = f(); // instantiate the coroutine
@@ -134,10 +134,10 @@ $(function() {
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
 
-        game.scale.enterFullScreen.add(onEnterFullScreen, this);
-        game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
-
-        game.input.onDown.add(gofull, this);
+        // game.scale.enterFullScreen.add(onEnterFullScreen, this);
+        // game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
+        //
+        // game.input.onDown.add(gofull, this);
 
         //prime that apple
         apple.kill();
@@ -383,14 +383,15 @@ $(function() {
 
     function render () {
 
-        if (game.scale.isFullScreen)
-        {
-            game.debug.text('ESC to leave fullscreen', (game.width/2)-140, 60);
-        }
-        else
-        {
-            game.debug.text('Click / Tap to go fullscreen', (game.width/2)-140, 16);
-        }
+        // Removed fullscreen message
+        // if (game.scale.isFullScreen)
+        // {
+        //     game.debug.text('ESC to leave fullscreen', (game.width/2)-140, 60);
+        // }
+        // else
+        // {
+        //     game.debug.text('Click / Tap to go fullscreen', (game.width/2)-140, 16);
+        // }
 
     }
 
