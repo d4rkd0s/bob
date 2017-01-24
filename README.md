@@ -2,7 +2,7 @@
 
 A game made in HTML5 with Phaser
 
-http://d4rkd0s.github.io/bob/
+http://d4rkd0s.github.io/bob/game.html
 
 ## Objectives
 
@@ -11,5 +11,5 @@ http://d4rkd0s.github.io/bob/
 
 ## Credits
 
-* d4rkd0s (main development, original idea, logic etc)
-* airinhowl26 (graphics, design)
+* d4rkd0s (main design, ideas... etc)
+* airinhowl26 (graphics, logic)
