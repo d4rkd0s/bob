@@ -1,18 +1,29 @@
+html, body {
+    height: 100%;
+}
+
+.container {
+    margin-top: 100px;
+    position: relative;
+    padding: 0 !important;
+}
+
 .start{
-	position:absolute;
-	left: 870px;
-	top: 169px;
-	width: 228px;
+    position: absolute;
+    bottom: 48%;
+    right: 24px;
 }
 .highscore{
-	position:absolute;
-	left: 870px;
-	top: 238px;
-	width: 228px;
+    position: absolute;
+    bottom: 32%;
+    right: 24px;
 }
 .quit{
-	position:absolute;
-	left: 870px;
-	top: 305px;
-	width: 228px;
+    position: absolute;
+    bottom: 16%;
+    right: 24px;
+}
+
+.background-image {
+    width: 100%;
 }
