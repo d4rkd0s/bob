@@ -1,0 +1,23 @@
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#score{
+    font-size:18px;
+    color:#A40E38;
+}
+#horseHealth{
+    font-size:18px;
+    color:#A40E38;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+
+#logo {
+    width: 300px;
+}

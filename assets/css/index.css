@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+}
+
+.container {
+    margin-top: 100px;
+    position: relative;
+    padding: 0 !important;
+}
+
+.start{
+    position: absolute;
+    bottom: 48%;
+    right: 24px;
+}
+.highscore{
+    position: absolute;
+    bottom: 32%;
+    right: 24px;
+}
+.quit{
+    position: absolute;
+    bottom: 16%;
+    right: 24px;
+}
+
+.background-image {
+    width: 100%;
+}
