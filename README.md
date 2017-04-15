@@ -4,12 +4,12 @@ A game made in HTML5 with Phaser
 
 http://d4rkd0s.github.io/bob/
 
-## Objectives
+### Objectives
 
 * Help Bob get all of his apples back.
 
 
-## Credits
+### Credits
 
 * d4rkd0s (main development, original idea, logic etc)
 * airinhowl26 (graphics, design)
