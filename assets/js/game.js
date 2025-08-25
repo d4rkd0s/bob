@@ -12,6 +12,7 @@ $(function() {
     var healthbarWidth;
     var horseMaxHealth;
     var prevHorseHealth;
+    var horseSentToVet;
     var horseFrames = ['horse1', 'horse2', 'horse3', 'horse4'];
 
     function preload() {
@@ -21,6 +22,7 @@ $(function() {
         hoof = 0;
         horseMaxHealth = 10;
         horseHealth = horseMaxHealth;
+        horseSentToVet = false;
         game.appleOnTree = 1;
         speed = 250;
         speedBonus = 0;
@@ -39,6 +41,10 @@ $(function() {
         game.load.image('healthbar', 'assets/images/healthbar.png');
         console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
+        console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
+        game.load.image('ambulance', 'assets/images/ambulance.png');
+        console.log("%c   loaded: ambulance   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         console.log("%c   loaded: horse frames   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('horse1', 'assets/images/horse1.png');
         game.load.image('horse2', 'assets/images/horse2.png');
@@ -241,6 +247,20 @@ $(function() {
         entity.inBush = true;
     }
 
+    function sendHorseToVet() {
+        game.time.events.remove(appleLoop);
+        var ambulance = game.add.sprite(-200, horse.y, 'ambulance');
+        var driveToHorse = game.add.tween(ambulance).to({x: horse.x - 100}, 2000, Phaser.Easing.Linear.None, true);
+        driveToHorse.onComplete.add(function () {
+            horse.kill();
+            var driveOff = game.add.tween(ambulance).to({x: game.world.width}, 2000, Phaser.Easing.Linear.None, true);
+            driveOff.onComplete.add(function () {
+                game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
+                game.physics.destroy();
+            }, this);
+        }, this);
+    }
+
     function update() {
 
         player.wasInBush = player.inBush;
@@ -319,18 +339,18 @@ $(function() {
             if ( game.physics.arcade.collide(apple, horse) == true && game.appleOnTree == 0 ){
                 horseHealth = horseHealth - 1;
                 if ( horseHealth == 1 ){
-                    $( "#horseHealth" ).text(horseHealth + " apple until your horse dies!");
+                    $( "#horseHealth" ).text(horseHealth + " apple until your horse needs the vet!");
                 }
                 else{
-                    $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
+                    $( "#horseHealth" ).text(horseHealth + " apples until your horse needs the vet!");
                 }
                 applesound.play();
                 apple.kill();
-                if ( horseHealth == 0 ){
+                if ( horseHealth == 0 && !horseSentToVet ){
+                    horseSentToVet = true;
                     $( "#score" ).text("Final Score: " + score);
-                    $( "#horseHealth" ).text("Your horse has died!");
-                    game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
-                    game.physics.destroy();
+                    $( "#horseHealth" ).text("Your horse is off to the vet!");
+                    sendHorseToVet();
                 }
                 console.log("horseHealth: " + horseHealth);
             }
