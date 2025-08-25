@@ -5,6 +5,7 @@ $(function() {
     var timerEvent;
     var appleLoop;
     var appleDelay = 3000;
+    var appleTick;
     var bushes;
     var bushsound;
     var healthbar;
@@ -75,7 +76,7 @@ $(function() {
             }
         });
 
-        var appleTick = coroutine(function*(_) {
+        appleTick = coroutine(function*(_) {
             while (true) {
                 yield _;
                 flingApple();
@@ -121,13 +122,13 @@ $(function() {
         bobsound.allowMultiple = true;
 
         bushsound = game.add.audio('bushsound');
-        bushsound.allowMultiple = true;
+        bushsound.allowMultiple = false;
 
         bushes = game.add.group();
         bushes.enableBody = true;
         for (var i = 0; i < 5; i++) {
             var randX = game.rnd.integerInRange(50, game.world.width - 100);
-            var randY = game.rnd.integerInRange(50, game.world.height - 100);
+            var randY = game.rnd.integerInRange(Math.floor(game.world.height * 0.2), game.world.height - 100);
             var bush = bushes.create(randX, randY, 'bush');
             bush.body.immovable = true;
         }
@@ -140,12 +141,16 @@ $(function() {
 
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
+        horse.inBush = false;
+        horse.wasInBush = false;
 
         //add sun
         sun = game.add.sprite(80, 20, 'sun');
 
         //add player
         player = game.add.sprite(775, game.world.height - 150, 'bob');
+        player.inBush = false;
+        player.wasInBush = false;
         console.log("%c   spawned: player   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //ocean
         game.physics.enable(ocean, Phaser.Physics.ARCADE);
@@ -222,13 +227,19 @@ $(function() {
         }
     }
 
-    function bushCollide() {
-        if (bushsound) {
+    function bushCollide(entity, bush) {
+        if (!entity.wasInBush && bushsound && !bushsound.isPlaying) {
             bushsound.play();
         }
+        entity.inBush = true;
     }
 
     function update() {
+
+        player.wasInBush = player.inBush;
+        player.inBush = false;
+        horse.wasInBush = horse.inBush;
+        horse.inBush = false;
 
         // adjust apple spawn timer based on score
         var newDelay = Math.max(3000 - score * 50, 1000);
