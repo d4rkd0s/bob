@@ -3,12 +3,17 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     var countdown;
     var timerEvent;
+    var healthbar;
+    var healthbarWidth;
+    var horseMaxHealth;
+    var prevHorseHealth;
     function preload() {
         //setting up starting vars
         max_apple_count = 100;
         score = 0;
         hoof = 0;
-        horseHealth = 10;
+        horseMaxHealth = 10;
+        horseHealth = horseMaxHealth;
         game.appleOnTree = 1;
         speed = 250;
         game.appleSpawnTime = game.time.totalElapsedSeconds();
@@ -20,8 +25,8 @@ $(function() {
         game.load.image('sun', 'assets/images/sun.png');
         game.load.image('background', 'assets/images/background.png');
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        //game.load.image('healthbar', 'assets/images/healthbar.png');
-        //console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('healthbar', 'assets/images/healthbar.png');
+        console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
         console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
@@ -86,9 +91,13 @@ $(function() {
         // Stretch to fill
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
-        //var healthbar = game.add.sprite(0,0,'healthbar');
-        //healthbar.cropEnabled = true;
-        //healthbar.crop.width = (character.health / character.maxHealth) * healthbar.width
+        healthbar = game.add.sprite(0, 0, 'healthbar');
+        healthbar.fixedToCamera = true;
+        healthbar.cropEnabled = true;
+        healthbarWidth = healthbar.width;
+        healthbar.crop.width = healthbarWidth;
+        healthbar.updateCrop();
+        prevHorseHealth = horseHealth;
 
         //text = "Score: " . score;
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
@@ -195,6 +204,7 @@ $(function() {
 
         var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
+        healthbar.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
@@ -386,8 +396,11 @@ $(function() {
 
         }
 
-
-
+        if (horseHealth !== prevHorseHealth) {
+            healthbar.crop.width = (horseHealth / horseMaxHealth) * healthbarWidth;
+            healthbar.updateCrop();
+            prevHorseHealth = horseHealth;
+        }
 
     } //update
 
