@@ -3,6 +3,8 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     var countdown;
     var timerEvent;
+    var bushes;
+    var bushsound;
     function preload() {
         //setting up starting vars
         max_apple_count = 100;
@@ -19,6 +21,8 @@ $(function() {
         game.load.image('tree', 'assets/images/tree.png');
         game.load.image('sun', 'assets/images/sun.png');
         game.load.image('background', 'assets/images/background.png');
+        game.load.image('bush', 'assets/images/bush.png');
+        console.log("%c   loaded: bush   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         //game.load.image('healthbar', 'assets/images/healthbar.png');
         //console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -30,6 +34,7 @@ $(function() {
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
         game.load.audio('bobsound', 'assets/sounds/bob.wav');
+        game.load.audio('bushsound', 'assets/sounds/bob.wav');
 
         // Walking case switch / coroutine
         function coroutine(f) {
@@ -100,6 +105,18 @@ $(function() {
         bobsound = game.add.audio('bobsound');
         bobsound.allowMultiple = true;
 
+        bushsound = game.add.audio('bushsound');
+        bushsound.allowMultiple = true;
+
+        bushes = game.add.group();
+        bushes.enableBody = true;
+        for (var i = 0; i < 5; i++) {
+            var randX = game.rnd.integerInRange(50, game.world.width - 100);
+            var randY = game.rnd.integerInRange(50, game.world.height - 100);
+            var bush = bushes.create(randX, randY, 'bush');
+            bush.body.immovable = true;
+        }
+
         ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         tree = game.add.sprite(450, 30, 'tree');
         console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
@@ -121,6 +138,7 @@ $(function() {
 
         //start physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.physics.arcade.enable(bushes);
         console.log("%c   physics: enabled(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         game.physics.arcade.enable(player);
         game.physics.arcade.enableBody(player);
@@ -191,6 +209,12 @@ $(function() {
         }
     }
 
+    function bushCollide() {
+        if (bushsound) {
+            bushsound.play();
+        }
+    }
+
     function update() {
 
         var curTime = game.time.totalElapsedSeconds();
@@ -199,6 +223,8 @@ $(function() {
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
         game.physics.arcade.collide(horse, ocean);
+        game.physics.arcade.collide(player, bushes, bushCollide, null, this);
+        game.physics.arcade.collide(horse, bushes, bushCollide, null, this);
         //horse.body.accelerateToObject(horse, player, 600, 250, 250);
 
         //  Reset the players velocity (movement)
