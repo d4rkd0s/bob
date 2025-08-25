@@ -3,6 +3,8 @@ $(function() {
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     var countdown;
     var timerEvent;
+    var appleLoop;
+    var appleDelay = 3000;
     var bushes;
     var bushsound;
     var healthbar;
@@ -82,8 +84,8 @@ $(function() {
 
         //walk step speed in ms
         setInterval(clock, 100);
-        //spawn apple in ms
-        setInterval(appleTick, 3000);
+        //spawn apple in ms using Phaser timer
+        appleLoop = game.time.events.loop(appleDelay, appleTick, this);
         //notify user (console)
         console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     }//preload
@@ -231,6 +233,14 @@ $(function() {
     }
 
     function update() {
+
+        // adjust apple spawn timer based on score
+        var newDelay = Math.max(3000 - score * 50, 1000);
+        if (newDelay !== appleDelay) {
+            appleDelay = newDelay;
+            game.time.events.remove(appleLoop);
+            appleLoop = game.time.events.loop(appleDelay, appleTick, this);
+        }
 
         var curTime = game.time.totalElapsedSeconds();
         apple.bringToTop();
