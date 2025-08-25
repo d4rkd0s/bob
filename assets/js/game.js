@@ -124,6 +124,9 @@ $(function() {
         bushsound = game.add.audio('bushsound');
         bushsound.allowMultiple = false;
 
+        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
+        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+
         bushes = game.add.group();
         bushes.enableBody = true;
         for (var i = 0; i < 5; i++) {
@@ -134,10 +137,7 @@ $(function() {
         }
 
         // goldenapplesound = game.add.audio('goldenapplesound'); // TODO: add golden apple sound
-
-        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         tree = game.add.sprite(450, 30, 'tree');
-        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
 
         //add horse
         horse = game.add.sprite(450, game.world.height - 300, 'horse');
