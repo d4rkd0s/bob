@@ -21,3 +21,9 @@ canvas {
 #logo {
     width: 300px;
 }
+
+#healthbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
