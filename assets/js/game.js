@@ -1,7 +1,7 @@
 $(function() {
     console.log("%c  ~~~  Bob v0.5 - Developed by d4rkd0s & d3mn5pwn ~~~  ", "color: #FFFFFF; font-size: 12px; background: #3F1338;");
     var game = new Phaser.Game(1156, 650, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
-    var countdown;
+    var elapsedTime;
     var timerEvent;
     var appleLoop;
     var appleDelay = 3000;
@@ -178,9 +178,9 @@ $(function() {
 
         //prime that apple
         apple.kill();
-        countdown = 60;
-        $('#timer').text('Time: ' + countdown);
-        timerEvent = game.time.events.loop(Phaser.Timer.SECOND, updateCountdown, this);
+        elapsedTime = 0;
+        $('#timer').text('Time: ' + elapsedTime);
+        timerEvent = game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
     }//create
 
     function onEnterFullScreen() {
@@ -195,13 +195,9 @@ $(function() {
 
     }
 
-    function updateCountdown() {
-        countdown--;
-        $('#timer').text('Time: ' + countdown);
-        if (countdown <= 0) {
-            game.time.events.remove(timerEvent);
-            levelEnd(score, horseHealth);
-        }
+    function updateTimer() {
+        elapsedTime++;
+        $('#timer').text('Time: ' + elapsedTime);
     }
 
     function gofull() {
