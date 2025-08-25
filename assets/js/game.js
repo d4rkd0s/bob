@@ -14,6 +14,7 @@ $(function() {
     var prevHorseHealth;
     var horseSentToVet;
     var horseFrames = ['horse1', 'horse2', 'horse3', 'horse4'];
+    var cursors, wasd;
     var treePositions = [{x:450, y:30}, {x:800, y:30}];
     var trees = [];
 
@@ -53,14 +54,6 @@ $(function() {
         game.load.image('horse3', 'assets/images/horse3.png');
         game.load.image('horse4', 'assets/images/horse4.png');
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        cursors = game.input.keyboard.createCursorKeys();
-        wasd = {
-            up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-            down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-            left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-            right: game.input.keyboard.addKey(Phaser.Keyboard.D)
-        };
-        console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
         game.load.audio('bobsound', 'assets/sounds/bob.wav');
         game.load.audio('bushsound', 'assets/sounds/bob.wav');
@@ -198,6 +191,16 @@ $(function() {
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
+
+        cursors = game.input.keyboard.createCursorKeys();
+        wasd = game.input.keyboard.addKeys({
+            up: Phaser.Keyboard.W,
+            down: Phaser.Keyboard.S,
+            left: Phaser.Keyboard.A,
+            right: Phaser.Keyboard.D
+        });
+        game.input.keyboard.addKeyCapture([Phaser.Keyboard.W, Phaser.Keyboard.A, Phaser.Keyboard.S, Phaser.Keyboard.D]);
+        console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
         // game.scale.enterFullScreen.add(onEnterFullScreen, this);
         // game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
