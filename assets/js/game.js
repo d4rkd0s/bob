@@ -275,7 +275,7 @@ $(function() {
         horse.inBush = false;
 
         // adjust apple spawn timer based on score
-        var newDelay = Math.max(3000 - score * 50, 1000);
+        var newDelay = computeAppleDelay(score);
         if (newDelay !== appleDelay) {
             appleDelay = newDelay;
             game.time.events.remove(appleLoop);
