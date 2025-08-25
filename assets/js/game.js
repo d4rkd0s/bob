@@ -13,6 +13,7 @@ $(function() {
     var horseMaxHealth;
     var prevHorseHealth;
     var horseSentToVet;
+    var horseFrames = ['horse1', 'horse2', 'horse3', 'horse4'];
 
     function preload() {
         //setting up starting vars
@@ -44,6 +45,11 @@ $(function() {
         game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
         game.load.image('ambulance', 'assets/images/ambulance.png');
         console.log("%c   loaded: ambulance   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   loaded: horse frames   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('horse1', 'assets/images/horse1.png');
+        game.load.image('horse2', 'assets/images/horse2.png');
+        game.load.image('horse3', 'assets/images/horse3.png');
+        game.load.image('horse4', 'assets/images/horse4.png');
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -77,6 +83,8 @@ $(function() {
                 hoof = 1;
                 yield _;
                 hoof = 2;
+                yield _;
+                hoof = 3;
             }
         });
 
@@ -89,6 +97,7 @@ $(function() {
 
         //walk step speed in ms
         setInterval(clock, 100);
+        setInterval(horseclock, 100);
         //spawn apple in ms using Phaser timer
         appleLoop = game.time.events.loop(appleDelay, appleTick, this);
         //notify user (console)
@@ -128,6 +137,9 @@ $(function() {
         bushsound = game.add.audio('bushsound');
         bushsound.allowMultiple = false;
 
+        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
+        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+
         bushes = game.add.group();
         bushes.enableBody = true;
         for (var i = 0; i < 5; i++) {
@@ -138,13 +150,10 @@ $(function() {
         }
 
         // goldenapplesound = game.add.audio('goldenapplesound'); // TODO: add golden apple sound
-
-        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
         tree = game.add.sprite(450, 30, 'tree');
-        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
 
         //add horse
-        horse = game.add.sprite(450, game.world.height - 300, 'horse');
+        horse = game.add.sprite(450, game.world.height - 300, 'horse1');
         horse.inBush = false;
         horse.wasInBush = false;
 
@@ -289,14 +298,11 @@ $(function() {
         if ( game.appleOnTree != 1 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
-            if ( hoof == 0 ){
-                horse.frame = 1;
-            }
-            if ( hoof == 1 ){
-                horse.frame = 2;
-            }
-            if ( hoof == 2 ){
-                horse.frame = 3;
+            horse.loadTexture(horseFrames[hoof]);
+            if (horse.body.velocity.x < 0) {
+                horse.scale.x = -1;
+            } else if (horse.body.velocity.x > 0) {
+                horse.scale.x = 1;
             }
         }
 
