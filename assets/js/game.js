@@ -52,6 +52,12 @@ $(function() {
         game.load.image('horse4', 'assets/images/horse4.png');
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         cursors = game.input.keyboard.createCursorKeys();
+        wasd = {
+            up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+            down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+            left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+            right: game.input.keyboard.addKey(Phaser.Keyboard.D)
+        };
         console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
         game.load.audio('bobsound', 'assets/sounds/bob.wav');
@@ -379,9 +385,9 @@ $(function() {
             }
         }
 
-        if (cursors.left.isDown)
+        if (cursors.left.isDown || wasd.left.isDown)
         {
-            if (cursors.up.isDown)
+            if (cursors.up.isDown || wasd.up.isDown)
             {
                 //  Move to the left+up
                 player.body.velocity.x = -speed;
@@ -393,7 +399,7 @@ $(function() {
                     player.frame = 5;
                 }
             }
-            else if (cursors.down.isDown)
+            else if (cursors.down.isDown || wasd.down.isDown)
             {
                 //  Move to the left+down
                 player.body.velocity.x = -speed;
@@ -419,9 +425,9 @@ $(function() {
 
         }
 
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown || wasd.right.isDown)
         {
-            if (cursors.up.isDown)
+            if (cursors.up.isDown || wasd.up.isDown)
             {
                 //  Move to the right+up
                 player.body.velocity.x = speed;
@@ -433,7 +439,7 @@ $(function() {
                     player.frame = 7;
                 }
             }
-            else if (cursors.down.isDown)
+            else if (cursors.down.isDown || wasd.down.isDown)
             {
                 //  Move to the right+down
                 player.body.velocity.x = speed;
@@ -458,7 +464,7 @@ $(function() {
             }
 
         }
-        else if (cursors.up.isDown)
+        else if (cursors.up.isDown || wasd.up.isDown)
         {
             //  Move to the up
             player.body.velocity.y = -speed;
@@ -469,7 +475,7 @@ $(function() {
                 player.frame = 3;
             }
         }
-        else if (cursors.down.isDown)
+        else if (cursors.down.isDown || wasd.down.isDown)
         {
             //  Move to the down
             player.body.velocity.y = speed;
