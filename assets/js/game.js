@@ -247,8 +247,13 @@ $(function() {
         var appleType = isGoldenApple ? 'goldenApple' : 'apple';
         var apple = apples.create(randX, randY, appleType);
         apple.body.collideWorldBounds = true;
-        apple.body.allowGravity = false;
-        apple.body.velocity.set(0);
+        // launch the apple upward with gravity so it arcs back down
+        apple.body.allowGravity = true;
+        apple.body.gravity.y = 300;
+        apple.body.velocity.y = -200;
+        apple.body.velocity.x = game.rnd.integerInRange(-50, 50);
+        // make sure apples remain above the trees
+        apple.bringToTop();
         game.time.events.add(Phaser.Timer.SECOND * 10, function(){ apple.destroy(); }, this);
         max_apple_count = max_apple_count - 1;
     }
@@ -347,6 +352,7 @@ $(function() {
             apples.forEachAlive(function(a){ a.bringToTop(); }, this);
         } else{
             player.bringToTop();
+            apples.forEachAlive(function(a){ a.bringToTop(); }, this);
         }
 
         game.physics.arcade.overlap(apples, player, collectApple, null, this);
