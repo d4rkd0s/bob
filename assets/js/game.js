@@ -5,31 +5,25 @@ $(function() {
     var timerEvent;
     var appleLoop;
     var appleDelay = 3000;
-    var appleTick;
     var bushes;
     var bushsound;
-    var healthbar;
-    var healthbarWidth;
-    var horseMaxHealth;
-    var prevHorseHealth;
+    var horseHealth;
     var horseSentToVet;
     var horseFrames = ['horse1', 'horse2', 'horse3', 'horse4'];
     var cursors, wasd;
     var treePositions = [{x:450, y:30}, {x:800, y:30}];
     var trees = [];
+    var apples;
 
     function preload() {
         //setting up starting vars
         max_apple_count = 100;
         score = 0;
         hoof = 0;
-        horseMaxHealth = 10;
-        horseHealth = horseMaxHealth;
+        horseHealth = 10;
         horseSentToVet = false;
-        game.appleOnTree = 1;
         speed = 250;
         speedBonus = 0;
-        game.appleSpawnTime = game.time.totalElapsedSeconds();
         //game.load.image('bob', 'assets/images/bob.png');
         game.load.spritesheet('bob', 'assets/images/bob.png', 54, 80);
         console.log("%c   loaded: spritesheet   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
@@ -41,8 +35,6 @@ $(function() {
         game.load.image('bush', 'assets/images/bush.png');
         console.log("%c   loaded: bush   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         console.log("%c   loaded: background   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        game.load.image('healthbar', 'assets/images/healthbar.png');
-        console.log("%c   loaded: healthbar   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.image('ocean', 'assets/images/ocean.png');
         console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
@@ -89,18 +81,11 @@ $(function() {
             }
         });
 
-        appleTick = coroutine(function*(_) {
-            while (true) {
-                yield _;
-                flingApple();
-            }
-        });
-
         //walk step speed in ms
         setInterval(clock, 100);
         setInterval(horseclock, 100);
-        //spawn apple in ms using Phaser timer
-        appleLoop = game.time.events.loop(appleDelay, appleTick, this);
+        //spawn apples in ms using Phaser timer
+        appleLoop = game.time.events.loop(appleDelay, spawnApples, this);
         //notify user (console)
         console.log("%c   walking: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
     }//preload
@@ -112,18 +97,8 @@ $(function() {
         console.log("%c   spawned: background   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
         //Game Objects
 
-        apple = game.add.sprite(100, 200, 'apple');
-        var appleSpawnTime = game.time.totalElapsedSeconds();
         // Stretch to fill
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-
-        healthbar = game.add.sprite(0, 0, 'healthbar');
-        healthbar.fixedToCamera = true;
-        healthbar.cropEnabled = true;
-        healthbarWidth = healthbar.width;
-        healthbar.crop.width = healthbarWidth;
-        healthbar.updateCrop();
-        prevHorseHealth = horseHealth;
 
         //text = "Score: " . score;
         //style = { font: "32px Arial", fill: "#3D4185", align: "center" };
@@ -183,11 +158,8 @@ $(function() {
         console.log("%c   physics: bounds(player)   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         game.physics.arcade.enable(horse);
         game.physics.arcade.enableBody(horse);
-        game.physics.arcade.enable(apple);
-        game.physics.arcade.enableBody(apple);
         player.body.collideWorldBounds = true;
         horse.body.collideWorldBounds = true;
-        apple.body.collideWorldBounds = true;
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
@@ -207,8 +179,11 @@ $(function() {
         //
         // game.input.onDown.add(gofull, this);
 
-        //prime that apple
-        apple.kill();
+        apples = game.add.group();
+        apples.enableBody = true;
+
+        spawnApples();
+
         elapsedTime = 0;
         $('#timer').text('Time: ' + elapsedTime);
         timerEvent = game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
@@ -243,17 +218,6 @@ $(function() {
         game.physics.destroy();
     }
 
-    function flingApple() {
-        if ( game.appleOnTree == '1' ) {
-            //set the apple to be off the tree
-            game.appleOnTree = 0;
-            apple.body.allowGravity = true;
-            apple.body.gravity.y = 300;
-            apple.body.velocity.y = -200;
-            apple.body.velocity.x = game.rnd.integerInRange(-50, 50);
-        }
-    }
-
     function bushCollide(entity, bush) {
         if (!entity.wasInBush && bushsound && !bushsound.isPlaying) {
             bushsound.play();
@@ -275,6 +239,65 @@ $(function() {
         }, this);
     }
 
+    function spawnAppleAtTree(index) {
+        var spawnTree = treePositions[index];
+        var randX = Math.floor(Math.random() * ((spawnTree.x + 200) - (spawnTree.x + 150) + 1) + (spawnTree.x + 150));
+        var randY = Math.floor(Math.random() * ((spawnTree.y + 160) - (spawnTree.y + 60) + 1) + (spawnTree.y + 60));
+        var isGoldenApple = Math.random() < 0.1;
+        var appleType = isGoldenApple ? 'goldenApple' : 'apple';
+        var apple = apples.create(randX, randY, appleType);
+        apple.body.collideWorldBounds = true;
+        apple.body.allowGravity = false;
+        apple.body.velocity.set(0);
+        game.time.events.add(Phaser.Timer.SECOND * 5, function(){ apple.kill(); }, this);
+        max_apple_count = max_apple_count - 1;
+    }
+
+    function spawnApples() {
+        if (max_apple_count <= 0) {
+            levelEnd(score, horseHealth);
+            return;
+        }
+        for (var i = 0; i < treePositions.length && max_apple_count > 0; i++) {
+            spawnAppleAtTree(i);
+        }
+    }
+
+    function collectApple(player, apple) {
+        if (apple.key === 'goldenApple') {
+            score = score + 5;
+            speedBonus = 200;
+            game.time.events.add(Phaser.Timer.SECOND * 5, function(){
+                speedBonus = 0;
+            }, this);
+        } else {
+            score = score + 1;
+            bobsound.play();
+        }
+        $("#score").text("Score: " + score);
+        apple.kill();
+        console.log("Score: " + score);
+    }
+
+    function horseEatApple(horse, apple) {
+        horseHealth = horseHealth - 1;
+        if (horseHealth == 1) {
+            $("#horseHealth").text(horseHealth + " apple until your horse needs the vet!");
+        }
+        else{
+            $("#horseHealth").text(horseHealth + " apples until your horse needs the vet!");
+        }
+        applesound.play();
+        apple.kill();
+        if (horseHealth == 0 && !horseSentToVet) {
+            horseSentToVet = true;
+            $("#score").text("Final Score: " + score);
+            $("#horseHealth").text("Your horse is off to the vet!");
+            sendHorseToVet();
+        }
+        console.log("horseHealth: " + horseHealth);
+    }
+
     function update() {
 
         player.wasInBush = player.inBush;
@@ -287,12 +310,8 @@ $(function() {
         if (newDelay !== appleDelay) {
             appleDelay = newDelay;
             game.time.events.remove(appleLoop);
-            appleLoop = game.time.events.loop(appleDelay, appleTick, this);
+            appleLoop = game.time.events.loop(appleDelay, spawnApples, this);
         }
-
-        var curTime = game.time.totalElapsedSeconds();
-        apple.bringToTop();
-        healthbar.bringToTop();
         //ocean collision
         game.physics.arcade.collide(player, ocean);
         game.physics.arcade.collide(player, horse);
@@ -309,9 +328,10 @@ $(function() {
         speed = 200+(10*score)+speedBonus;
 
         //move mr.horse
-        if ( game.appleOnTree != 1 )
+        if (apples.countLiving() > 0)
         {
-            horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
+            var targetApple = game.physics.arcade.closest(horse, apples);
+            horse.velocity = game.physics.arcade.accelerateToObject(horse, targetApple, 50+(score*5), 50+(score*5), 50+(score*5));
             horse.loadTexture(horseFrames[hoof]);
             if (horse.body.velocity.x < 0) {
                 horse.scale.x = -1;
@@ -324,80 +344,13 @@ $(function() {
             for (var i = 0; i < trees.length; i++) {
                 trees[i].bringToTop();
             }
-            apple.bringToTop();
+            apples.forEachAlive(function(a){ a.bringToTop(); }, this);
         } else{
             player.bringToTop();
         }
 
-        if ( apple.alive == true){
-            if ( game.appleSpawnTime+3 < curTime && game.appleOnTree == 1 ){
-                game.appleOnTree = 0;
-                console.log("Apple ready to fling!");
-            }
-            if ( game.physics.arcade.overlap(apple, player) == true && game.appleOnTree == 0 ){
-                if ( apple.key === 'goldenApple' ){
-                    score = score + 5;
-                    speedBonus = 200;
-                    // TODO: play golden apple sound
-                    // TODO: add golden apple visual effect
-                    game.time.events.add(Phaser.Timer.SECOND * 5, function(){
-                        speedBonus = 0;
-                    }, this);
-                }
-                else{
-                    score = score + 1;
-                    bobsound.play();
-                }
-                $( "#score" ).text("Score: " + score);
-                apple.kill();
-                console.log("Score: " + score);
-            }
-            if ( game.physics.arcade.collide(apple, horse) == true && game.appleOnTree == 0 ){
-                horseHealth = horseHealth - 1;
-                if ( horseHealth == 1 ){
-                    $( "#horseHealth" ).text(horseHealth + " apple until your horse needs the vet!");
-                }
-                else{
-                    $( "#horseHealth" ).text(horseHealth + " apples until your horse needs the vet!");
-                }
-                applesound.play();
-                apple.kill();
-                if ( horseHealth == 0 && !horseSentToVet ){
-                    horseSentToVet = true;
-                    $( "#score" ).text("Final Score: " + score);
-                    $( "#horseHealth" ).text("Your horse is off to the vet!");
-                    sendHorseToVet();
-                }
-                console.log("horseHealth: " + horseHealth);
-            }
-        } else{
-            if ( max_apple_count > 0 ){
-                // apple count is 0
-                var spawnTree = treePositions[game.rnd.integerInRange(0, treePositions.length - 1)];
-                randX = Math.floor(Math.random() * ((spawnTree.x + 200) - (spawnTree.x + 150) + 1) + (spawnTree.x + 150));
-                randY = Math.floor(Math.random() * ((spawnTree.y + 160) - (spawnTree.y + 60) + 1) + (spawnTree.y + 60));
-
-                console.log("Apple is clear of horse, spawning apple.");
-                var isGoldenApple = Math.random() < 0.1;
-                var appleType = isGoldenApple ? 'goldenApple' : 'apple';
-                apple = game.add.sprite(randX, randY, appleType);
-                max_apple_count = max_apple_count - 1;
-                game.appleOnTree = 1;
-                game.appleSpawnTime = game.time.totalElapsedSeconds();
-                console.log(game.appleSpawnTime);
-                game.physics.arcade.enable(apple);
-                game.physics.arcade.enableBody(apple);
-                apple.body.collideWorldBounds = true;
-                apple.body.allowGravity = false;
-                apple.body.gravity.y = 0;
-                apple.body.velocity.set(0);
-                game.physics.arcade.collide(player, apple);
-                game.physics.arcade.collide(ocean, apple);
-            } else {
-                //max_apple_count isnt 0
-                levelEnd(game.score, game.horseHealth);
-            }
-        }
+        game.physics.arcade.overlap(apples, player, collectApple, null, this);
+        game.physics.arcade.overlap(apples, horse, horseEatApple, null, this);
 
         if (cursors.left.isDown || wasd.left.isDown)
         {
@@ -500,12 +453,6 @@ $(function() {
                 player.frame = 1;
             }
 
-        }
-
-        if (horseHealth !== prevHorseHealth) {
-            healthbar.crop.width = (horseHealth / horseMaxHealth) * healthbarWidth;
-            healthbar.updateCrop();
-            prevHorseHealth = horseHealth;
         }
 
     } //update
