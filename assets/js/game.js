@@ -330,7 +330,7 @@ $(function() {
         //move mr.horse
         if (apples.countLiving() > 0)
         {
-            var targetApple = game.physics.arcade.closest(horse, apples);
+            var targetApple = apples.getClosestTo(horse);
             horse.velocity = game.physics.arcade.accelerateToObject(horse, targetApple, 50+(score*5), 50+(score*5), 50+(score*5));
             horse.loadTexture(horseFrames[hoof]);
             if (horse.body.velocity.x < 0) {
