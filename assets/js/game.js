@@ -249,7 +249,7 @@ $(function() {
         apple.body.collideWorldBounds = true;
         apple.body.allowGravity = false;
         apple.body.velocity.set(0);
-        game.time.events.add(Phaser.Timer.SECOND * 5, function(){ apple.kill(); }, this);
+        game.time.events.add(Phaser.Timer.SECOND * 10, function(){ apple.destroy(); }, this);
         max_apple_count = max_apple_count - 1;
     }
 
@@ -275,7 +275,7 @@ $(function() {
             bobsound.play();
         }
         $("#score").text("Score: " + score);
-        apple.kill();
+        apple.destroy();
         console.log("Score: " + score);
     }
 
@@ -288,7 +288,7 @@ $(function() {
             $("#horseHealth").text(horseHealth + " apples until your horse needs the vet!");
         }
         applesound.play();
-        apple.kill();
+        apple.destroy();
         if (horseHealth == 0 && !horseSentToVet) {
             horseSentToVet = true;
             $("#score").text("Final Score: " + score);
