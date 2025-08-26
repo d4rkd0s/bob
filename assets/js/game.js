@@ -12,6 +12,11 @@ $(function() {
     var healthbarWidth;
     var horseMaxHealth;
     var prevHorseHealth;
+    var horseSentToVet;
+    var horseFrames = ['horse1', 'horse2', 'horse3', 'horse4'];
+    var cursors, wasd;
+    var treePositions = [{x:450, y:30}, {x:800, y:30}];
+    var trees = [];
 
     function preload() {
         //setting up starting vars
@@ -20,6 +25,7 @@ $(function() {
         hoof = 0;
         horseMaxHealth = 10;
         horseHealth = horseMaxHealth;
+        horseSentToVet = false;
         game.appleOnTree = 1;
         speed = 250;
         speedBonus = 0;
@@ -40,9 +46,14 @@ $(function() {
         game.load.image('ocean', 'assets/images/ocean.png');
         console.log("%c   loaded: horse   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.spritesheet('horse', 'assets/images/horse.png', 154, 113);
+        game.load.image('ambulance', 'assets/images/ambulance.png');
+        console.log("%c   loaded: ambulance   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        console.log("%c   loaded: horse frames   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
+        game.load.image('horse1', 'assets/images/horse1.png');
+        game.load.image('horse2', 'assets/images/horse2.png');
+        game.load.image('horse3', 'assets/images/horse3.png');
+        game.load.image('horse4', 'assets/images/horse4.png');
         console.log("%c   set border: ocean   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
-        cursors = game.input.keyboard.createCursorKeys();
-        console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
         game.load.audio('applesound', 'assets/sounds/apple.wav');
         game.load.audio('bobsound', 'assets/sounds/bob.wav');
         game.load.audio('bushsound', 'assets/sounds/bob.wav');
@@ -73,6 +84,8 @@ $(function() {
                 hoof = 1;
                 yield _;
                 hoof = 2;
+                yield _;
+                hoof = 3;
             }
         });
 
@@ -85,6 +98,7 @@ $(function() {
 
         //walk step speed in ms
         setInterval(clock, 100);
+        setInterval(horseclock, 100);
         //spawn apple in ms using Phaser timer
         appleLoop = game.time.events.loop(appleDelay, appleTick, this);
         //notify user (console)
@@ -124,6 +138,9 @@ $(function() {
         bushsound = game.add.audio('bushsound');
         bushsound.allowMultiple = false;
 
+        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
+        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+
         bushes = game.add.group();
         bushes.enableBody = true;
         for (var i = 0; i < 5; i++) {
@@ -134,13 +151,12 @@ $(function() {
         }
 
         // goldenapplesound = game.add.audio('goldenapplesound'); // TODO: add golden apple sound
-
-        ocean = game.add.sprite(0, game.world.height - 484, 'ocean');
-        tree = game.add.sprite(450, 30, 'tree');
-        console.log("%c   spawned: border(ocean)   ", "color: #FFFFFF; font-size: 10px; background: #FCD22F;");
+        for (var i = 0; i < treePositions.length; i++) {
+            trees[i] = game.add.sprite(treePositions[i].x, treePositions[i].y, 'tree');
+        }
 
         //add horse
-        horse = game.add.sprite(450, game.world.height - 300, 'horse');
+        horse = game.add.sprite(450, game.world.height - 300, 'horse1');
         horse.inBush = false;
         horse.wasInBush = false;
 
@@ -175,6 +191,16 @@ $(function() {
         console.log("%c   collideWorldBounds: enabled   ", "color: #FFFFFF; font-size: 10px; background: #83CB53;");
         horse.anchor.x = 0.5;
         horse.anchor.y = 0.5;
+
+        cursors = game.input.keyboard.createCursorKeys();
+        wasd = game.input.keyboard.addKeys({
+            up: Phaser.Keyboard.W,
+            down: Phaser.Keyboard.S,
+            left: Phaser.Keyboard.A,
+            right: Phaser.Keyboard.D
+        });
+        game.input.keyboard.addKeyCapture([Phaser.Keyboard.W, Phaser.Keyboard.A, Phaser.Keyboard.S, Phaser.Keyboard.D]);
+        console.log("%c   user input: enabled   ", "color: #FFFFFF; font-size: 10px; background: #5CA6FF;");
 
         // game.scale.enterFullScreen.add(onEnterFullScreen, this);
         // game.scale.leaveFullScreen.add(onLeaveFullScreen, this);
@@ -221,9 +247,10 @@ $(function() {
         if ( game.appleOnTree == '1' ) {
             //set the apple to be off the tree
             game.appleOnTree = 0;
-            //simply move it down (for now)
-            apple.allowGravity = true;
-            apple.body.velocity.y = 50;
+            apple.body.allowGravity = true;
+            apple.body.gravity.y = 300;
+            apple.body.velocity.y = -200;
+            apple.body.velocity.x = game.rnd.integerInRange(-50, 50);
         }
     }
 
@@ -234,6 +261,20 @@ $(function() {
         entity.inBush = true;
     }
 
+    function sendHorseToVet() {
+        game.time.events.remove(appleLoop);
+        var ambulance = game.add.sprite(-200, horse.y, 'ambulance');
+        var driveToHorse = game.add.tween(ambulance).to({x: horse.x - 100}, 2000, Phaser.Easing.Linear.None, true);
+        driveToHorse.onComplete.add(function () {
+            horse.kill();
+            var driveOff = game.add.tween(ambulance).to({x: game.world.width}, 2000, Phaser.Easing.Linear.None, true);
+            driveOff.onComplete.add(function () {
+                game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
+                game.physics.destroy();
+            }, this);
+        }, this);
+    }
+
     function update() {
 
         player.wasInBush = player.inBush;
@@ -242,7 +283,7 @@ $(function() {
         horse.inBush = false;
 
         // adjust apple spawn timer based on score
-        var newDelay = Math.max(3000 - score * 50, 1000);
+        var newDelay = computeAppleDelay(score);
         if (newDelay !== appleDelay) {
             appleDelay = newDelay;
             game.time.events.remove(appleLoop);
@@ -271,19 +312,18 @@ $(function() {
         if ( game.appleOnTree != 1 )
         {
             horse.velocity = game.physics.arcade.accelerateToObject(horse, apple, 50+(score*5), 50+(score*5), 50+(score*5));
-            if ( hoof == 0 ){
-                horse.frame = 1;
-            }
-            if ( hoof == 1 ){
-                horse.frame = 2;
-            }
-            if ( hoof == 2 ){
-                horse.frame = 3;
+            horse.loadTexture(horseFrames[hoof]);
+            if (horse.body.velocity.x < 0) {
+                horse.scale.x = -1;
+            } else if (horse.body.velocity.x > 0) {
+                horse.scale.x = 1;
             }
         }
 
         if ( player.y < 250 ) {
-            tree.bringToTop();
+            for (var i = 0; i < trees.length; i++) {
+                trees[i].bringToTop();
+            }
             apple.bringToTop();
         } else{
             player.bringToTop();
@@ -315,26 +355,27 @@ $(function() {
             if ( game.physics.arcade.collide(apple, horse) == true && game.appleOnTree == 0 ){
                 horseHealth = horseHealth - 1;
                 if ( horseHealth == 1 ){
-                    $( "#horseHealth" ).text(horseHealth + " apple until your horse dies!");
+                    $( "#horseHealth" ).text(horseHealth + " apple until your horse needs the vet!");
                 }
                 else{
-                    $( "#horseHealth" ).text(horseHealth + " apples until your horse dies!");
+                    $( "#horseHealth" ).text(horseHealth + " apples until your horse needs the vet!");
                 }
                 applesound.play();
                 apple.kill();
-                if ( horseHealth == 0 ){
+                if ( horseHealth == 0 && !horseSentToVet ){
+                    horseSentToVet = true;
                     $( "#score" ).text("Final Score: " + score);
-                    $( "#horseHealth" ).text("Your horse has died!");
-                    game.debug.text('Retry? (Refresh the page)', (game.width/2)-140, game.height/2);
-                    game.physics.destroy();
+                    $( "#horseHealth" ).text("Your horse is off to the vet!");
+                    sendHorseToVet();
                 }
                 console.log("horseHealth: " + horseHealth);
             }
         } else{
             if ( max_apple_count > 0 ){
                 // apple count is 0
-                randX = Math.floor(Math.random()*(650-600+1)+600);
-                randY = Math.floor(Math.random()*(190-90+1)+90);
+                var spawnTree = treePositions[game.rnd.integerInRange(0, treePositions.length - 1)];
+                randX = Math.floor(Math.random() * ((spawnTree.x + 200) - (spawnTree.x + 150) + 1) + (spawnTree.x + 150));
+                randY = Math.floor(Math.random() * ((spawnTree.y + 160) - (spawnTree.y + 60) + 1) + (spawnTree.y + 60));
 
                 console.log("Apple is clear of horse, spawning apple.");
                 var isGoldenApple = Math.random() < 0.1;
@@ -347,6 +388,9 @@ $(function() {
                 game.physics.arcade.enable(apple);
                 game.physics.arcade.enableBody(apple);
                 apple.body.collideWorldBounds = true;
+                apple.body.allowGravity = false;
+                apple.body.gravity.y = 0;
+                apple.body.velocity.set(0);
                 game.physics.arcade.collide(player, apple);
                 game.physics.arcade.collide(ocean, apple);
             } else {
@@ -355,9 +399,9 @@ $(function() {
             }
         }
 
-        if (cursors.left.isDown)
+        if (cursors.left.isDown || wasd.left.isDown)
         {
-            if (cursors.up.isDown)
+            if (cursors.up.isDown || wasd.up.isDown)
             {
                 //  Move to the left+up
                 player.body.velocity.x = -speed;
@@ -369,7 +413,7 @@ $(function() {
                     player.frame = 5;
                 }
             }
-            else if (cursors.down.isDown)
+            else if (cursors.down.isDown || wasd.down.isDown)
             {
                 //  Move to the left+down
                 player.body.velocity.x = -speed;
@@ -395,9 +439,9 @@ $(function() {
 
         }
 
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown || wasd.right.isDown)
         {
-            if (cursors.up.isDown)
+            if (cursors.up.isDown || wasd.up.isDown)
             {
                 //  Move to the right+up
                 player.body.velocity.x = speed;
@@ -409,7 +453,7 @@ $(function() {
                     player.frame = 7;
                 }
             }
-            else if (cursors.down.isDown)
+            else if (cursors.down.isDown || wasd.down.isDown)
             {
                 //  Move to the right+down
                 player.body.velocity.x = speed;
@@ -434,7 +478,7 @@ $(function() {
             }
 
         }
-        else if (cursors.up.isDown)
+        else if (cursors.up.isDown || wasd.up.isDown)
         {
             //  Move to the up
             player.body.velocity.y = -speed;
@@ -445,7 +489,7 @@ $(function() {
                 player.frame = 3;
             }
         }
-        else if (cursors.down.isDown)
+        else if (cursors.down.isDown || wasd.down.isDown)
         {
             //  Move to the down
             player.body.velocity.y = speed;

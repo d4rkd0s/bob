@@ -1,0 +1,16 @@
+{
+  "name": "bob",
+  "version": "1.0.0",
+  "description": "![Imgur](https://raw.githubusercontent.com/d4rkd0s/bob/master/assets/images/logo.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "mocha": "^11.7.1"
+  }
+}
